@@ -1,0 +1,28 @@
+// Width
+@for $i from 1 through 20 {
+  $value: $i * 5;
+  .#{$prefix}w-#{$value} {
+    width: $value*1%;
+  }
+}
+
+// Width in px
+@for $i from 1 through 20 {
+  $value: $i * 50;
+  .#{$prefix}wpx-#{$value} {
+    width: $value*1px;
+  }
+}
+
+// Height
+@for $i from 1 through 20 {
+  $value: $i * 5;
+  .#{$prefix}h-#{$value} {
+    height: $value*1%;
+  }
+}
+
+// hide
+.#{$prefix}hide {
+  display: none !important;
+}

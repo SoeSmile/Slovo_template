@@ -1,0 +1,27 @@
+.#{$prefix}input {
+  border: 1px solid;
+  background: map_get($colors, 'grey-1');
+  border-radius: 3px;
+  width: 100%;
+  box-sizing: border-box;
+
+  @include bd_color();
+
+  &:focus {
+    background: map_get($colors, 'white');
+    transition: all 1s cubic-bezier(.25, .8, .25, 1);
+  }
+}
+
+.#{$prefix}input-error {
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  color: map_get($colors, 'red');
+  text-align: center;
+}
+
+
+:not(output):-moz-ui-invalid {
+  box-shadow: none;
+}
+

@@ -1,0 +1,13 @@
+.#{$prefix}button {
+  display: inline-block;
+  width: max-content;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+
+  &:hover{
+    opacity: 0.9;
+    transition: all 1s cubic-bezier(.25,.8,.25,1);
+  }
+}

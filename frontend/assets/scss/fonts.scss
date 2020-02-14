@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'Ptrootuilight';
+  src: url('../fonts/Ptrootuilight.woff2') format('woff2'),
+  url('../fonts/Ptrootuilight.woff') format('woff'),
+  url('../fonts/Ptrootuilight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ptrootui';
+  src: url('../fonts/Ptrootui.woff2') format('woff2'),
+  url('../fonts/Ptrootui.woff') format('woff'),
+  url('../fonts/Ptrootui.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ptrootuimedium';
+  src: url('../fonts/Ptrootuimedium.woff2') format('woff2'),
+  url('../fonts/Ptrootuimedium.woff') format('woff'),
+  url('../fonts/Ptrootuimedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ptrootuibold';
+  src: url('../fonts/Ptrootuibold.woff2') format('woff2'),
+  url('../fonts/Ptrootuibold.woff') format('woff'),
+  url('../fonts/Ptrootuibold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+// Fonts
+$fontLight: Ptrootuilight;
+$fontRegular: Ptrootui;
+$fontMedium: Ptrootuimedium;
+$fontBold: Ptrootuibold;
+
+// Font size
+$fontSize: 0.75rem !default;
+
+.fnt {
+  &-bold {
+    font-family: $fontBold;
+  }
+
+  &-light {
+    font-family: $fontLight;
+  }
+
+  &-med {
+    font-family: $fontMedium;
+  }
+
+  &-regular {
+    font-family: $fontRegular;
+  }
+
+  @for $i from 0 through 9 {
+    &-size-#{$i} {
+      font-size: $fontSize !important;
+    }
+    $fontSize: $fontSize + 0.25;
+  }
+}

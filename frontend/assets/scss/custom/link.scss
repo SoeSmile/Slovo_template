@@ -1,0 +1,12 @@
+.cs-link-menu-head {
+  cursor: pointer;
+
+  &:hover {
+    color: map-get($colors, 'orange') !important;
+    transition: all 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+  }
+
+  &-active {
+    color: map-get($colors, 'orange') !important;
+  }
+}

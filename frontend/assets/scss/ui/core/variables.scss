@@ -1,0 +1,45 @@
+/**
+ Prefix
+ */
+$prefix: sm-;
+
+/**
+ Max wight
+ */
+$wightMain: 100%;
+
+/**
+ Left and Right
+ */
+$left: 150px;
+$right: 150px;
+
+/**
+ Padding && margin step
+ */
+$size: 0.25rem;
+
+/**
+ Font size start
+ */
+$fontSize: 0.75rem;
+
+/**
+ Response size
+ */
+
+$xs: 180px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+$mobile: (
+        'xs':$xs,
+        'sm':$sm
+);
+
+/**
+ Z-index
+ */
+$z-layout: 2;

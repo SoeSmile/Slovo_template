@@ -1,0 +1,20 @@
+// Mobile show/hide
+.#{$prefix}mobile {
+  &-hide {
+    display: inherit;
+    @each $key, $value in $mobile {
+      @media only screen and (max-width: $value) {
+        display: none !important;
+      }
+    }
+  }
+
+  &-show {
+    display: none !important;
+    @each $key, $value in $mobile {
+      @media only screen and (max-width: $value) {
+        display: inherit !important;
+      }
+    }
+  }
+}

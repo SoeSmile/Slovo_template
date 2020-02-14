@@ -1,0 +1,77 @@
+/**
+  Variables colors
+*/
+$colors: (
+        'white':#ffffff,
+        'black':#000000,
+        'red':#e74c3c,
+        'purple':#9C27B0,
+        'indigo':#3F51B5,
+        'blue':#2980b9,
+        'teal':#009688,
+        'yellow':#f1c40f,
+        'lime':#CDDC39,
+        'orange':#f39c12,
+        'grey':#9E9E9E,
+        'grey-1':#ecf0f1,
+        'grey-2':#95a5a6,
+        'grey-3':#bdc3c7,
+        'grey-4':#7f8c8d,
+        'dark':#34495e,
+        'dark-1':#2c3e50,
+        'blue-light':#b8daff,
+        'red-light':#f5c6cb,
+        'green-light':#c3e6cb,
+        'yellow-light':#ffeeba,
+);
+
+$mainColors: (
+        'blue':#2980b9,
+        'teal':#009688,
+        'red':#e74c3c,
+        'orange':#f39c12,
+        'grey':#9E9E9E,
+        'dark':#34495e,
+);
+
+@each $name, $value in $colors {
+  .#{$prefix}color-#{$name} {
+    color: $value !important;
+  }
+}
+
+@each $name, $value in $colors {
+  .#{$prefix}bg-#{$name} {
+    background-color: $value !important;
+  }
+}
+
+@each $name, $value in $colors {
+  .#{$prefix}bd-#{$name} {
+    border-color: $value !important;
+  }
+}
+
+@mixin bd_color() {
+  @each $name, $value in $mainColors {
+    &.#{$name} {
+      border-color: $value;
+    }
+  }
+}
+
+@mixin text_color() {
+  @each $name, $value in $mainColors {
+    &.#{$name} {
+      border-color: $value;
+    }
+  }
+}
+
+@mixin bg_color() {
+  @each $name, $value in $mainColors {
+    &.#{$name} {
+      border-color: $value;
+    }
+  }
+}

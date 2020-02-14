@@ -1,0 +1,21 @@
+@import "reset";
+@import "~normalize.css";
+@import "~@mdi/font/scss/materialdesignicons";
+@import "fonts";
+@import "~animate.css";
+@import "ui/ui";
+@import "custom/all";
+
+
+html, body, #__nuxt, #__layout {
+  height: 100%;
+  font-family: $fontRegular;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .2s;
+}
+
+.page-enter, .page-leave-active {
+  opacity: 0;
+}
