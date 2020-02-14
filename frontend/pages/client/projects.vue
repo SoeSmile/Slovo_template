@@ -1,10 +1,29 @@
 <template>
     <div>
-        projects.vue
+        <table>
+            <thead>
+            <tr>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+                <th>1</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     </div>
 </template>
 
 <script>
+
     export default {
         name: "projects",
 
