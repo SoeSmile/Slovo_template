@@ -17,7 +17,7 @@ export const mutations = {
         state.token     = data.token;
         state.expiresIn = data.expiresIn;
         // set head
-        this.$axios.setHeader('Authorization', 'Bearer ' + data.token);
+        this.$axios.setToken(data.token, 'Bearer');
         // set cookie
         this.$cookies.set('token', data.token, {maxAge: data.expiresIn});
     },
@@ -90,6 +90,19 @@ export const actions = {
             return this.$router.push('/')
         }
         catch (e) {
+            return this.$router.push('/')
         }
+    },
+    /**
+     * clear User
+     * @param commit
+     * @return {*|number}
+     */
+    clearUser({commit}) {
+        commit('SET_USER');
+        commit('SET_TOKEN');
+        this.$cookies.remove('token');
+
+        return this.$router.push('/')
     }
 };

@@ -20,7 +20,8 @@ export default {
 
     plugins: [
         '~/plugins/ui.js',
-        '~/plugins/trans.js'
+        '~/plugins/trans.js',
+        '~/plugins/axios'
     ],
 
     modules: [
