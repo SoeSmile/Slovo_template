@@ -32,6 +32,8 @@
     export default {
         name: "register",
 
+        layout: 'site',
+
         middleware: ['noAuth'],
 
         head () {

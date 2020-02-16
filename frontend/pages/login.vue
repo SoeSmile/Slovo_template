@@ -45,6 +45,8 @@
 
         middleware: ['noAuth'],
 
+        layout: 'site',
+
         head () {
             return {
                 title: this.trans.menu.enter
