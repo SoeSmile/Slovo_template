@@ -7,7 +7,7 @@
       & th {
         font-family: $fontBold;
         padding: map_get($sizes, 2);
-        border-bottom: 2px solid map_get($colors, 'dark');
+        border-bottom: 2px solid map_get($colors, 'grey-3');
         text-align: center;
         color: map_get($colors, 'dark');
         background-color: map_get($colors, 'grey-1');
@@ -41,9 +41,10 @@
       }
 
       & td {
-        border-bottom: 1px solid map_get($colors, 'dark');
+        border-bottom: 1px solid map_get($colors, 'grey-3');
         padding: map_get($sizes, 1);
         text-align: center;
+        color: map_get($colors, 'dark');
 
         &.left {
           text-align: left;
@@ -61,7 +62,7 @@
       & th {
         font-family: $fontBold;
         padding: map_get($sizes, 2);
-        border-bottom: 2px solid map_get($colors, 'dark');
+        border-bottom: 2px solid map_get($colors, 'grey');
         text-align: center;
         color: map_get($colors, 'dark');
         background-color: map_get($colors, 'grey-1');

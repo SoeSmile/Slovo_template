@@ -56,9 +56,9 @@ abstract class AbstractRepository
      */
     public function all(array $data = [])
     {
-        if (isset($data['page'])) {
+        if (isset($data['count'])) {
 
-            return $this->query->paginate($data['page'] ?? 25);
+            return $this->query->paginate($data['count'] ?? 25);
         }
 
         return $this->query->get();

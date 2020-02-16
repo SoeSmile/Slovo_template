@@ -45,4 +45,16 @@
   &.col {
     flex-direction: column;
   }
+
+  &.wrap-start {
+    align-content: start;
+  }
+
+  &.wrap-end {
+    align-content: end;
+  }
+
+  &.wrap-space {
+    align-content: space-between;
+  }
 }
