@@ -1,5 +1,8 @@
 <?php
 
+// todo remove only for test
+Route::get('test','TestController@index');
+
 Route::group(['namespace' => 'Api'], static function () {
 
     Route::apiResource('lang', 'ApiLangController')->only('index');
