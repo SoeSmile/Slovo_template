@@ -1,6 +1,6 @@
 <template>
     <div class="sm-flex col sm-bg-dark sm-color-white sm-p-3"
-         :class="showMenu ? 'sm-wpx-200' : 'sm-wpx-50'">
+         :class="showMenu ? 'sm-wpx-250' : 'sm-wpx-50'">
 
         <div class="sm-flex right">
             <i class="mdi mdi-menu cs-link-menu-head fnt-size-3"

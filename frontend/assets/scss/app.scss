@@ -7,9 +7,11 @@
 @import "custom/all";
 
 
-html, body, #__nuxt, #__layout {
-  height: 100%;
+#__nuxt, #__layout {
   font-family: $fontRegular;
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
 }
 
 .page-enter-active, .page-leave-active {

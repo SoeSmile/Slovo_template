@@ -26,14 +26,13 @@ final class ProjectRepository extends AbstractRepository
 
     /**
      * @param array $data
-     * @param int|null $page
      * @return LengthAwarePaginator|Builder[]|Collection
      */
-    public function all(array $data = [], int $page = null)
+    public function all(array $data = [])
     {
         // Фильтр по пользователю
         $this->filter('user_id', $data['user'] ?? auth()->id());
 
-        return parent::all($data, $page);
+        return parent::all($data);
     }
 }

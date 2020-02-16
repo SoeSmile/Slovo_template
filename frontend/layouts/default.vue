@@ -1,5 +1,5 @@
 <template>
-    <div class="sm-flex col sm-h-100">
+    <div class="sm-flex col sm-vh-100">
 
         <site-head/>
 

@@ -60,6 +60,7 @@ export const actions = {
             const response = await this.$axios.post('api/login', user);
             commit('SET_USER', response.data);
             commit('SET_TOKEN', response.data);
+
             return this.$router.push('client')
         }
         catch (e) {
@@ -85,6 +86,7 @@ export const actions = {
             commit('SET_USER');
             commit('SET_TOKEN');
             this.$cookies.remove('token');
+
             return this.$router.push('/')
         }
         catch (e) {

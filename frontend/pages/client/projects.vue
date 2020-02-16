@@ -1,20 +1,28 @@
 <template>
-    <div>
-        <table>
+    <div class="sm-flex sm-w-100 sm-p-3 sm-bg-white">
+        <table class="sm-table">
             <thead>
             <tr>
-                <th>1</th>
-                <th>1</th>
-                <th>1</th>
-                <th>1</th>
+                <th class="sm-w-30">
+                    {{ this.trans.project.name }}
+                </th>
+                <th class="sm-w-30">
+                    {{ this.trans.project.owner }}
+                </th>
+                <th class="sm-w-30">
+                    {{ this.trans.project.url }}
+                </th>
+                <th>{{ this.trans.all.additional }}</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
+            <tr class="hover click"
+                v-for="(val,key) in projects"
+                :key="key">
+                <td class="left">{{ val.name }}</td>
+                <td>{{ val.user.login }}</td>
+                <td>{{ val.url }}</td>
+                <td>{{ val.data }}</td>
             </tr>
             </tbody>
             <tfoot></tfoot>
@@ -29,8 +37,14 @@
 
         layout: 'layoutClient',
 
+        head() {
+            return {
+                title: this.trans.project.projects
+            }
+        },
+
         created() {
-            this.get();
+            this.$store.dispatch('project/getProjects', {page: 5});
         },
 
         mounted() {
@@ -42,20 +56,18 @@
             return {}
         },
 
-        computed: {},
+        computed: {
+            /**
+             * projects
+             * @return {*}
+             */
+            projects() {
+                return this.$store.getters['project/projects'];
+            }
+        },
 
         watch: {},
 
-        methods: {
-            get() {
-                this.$axios.get('../api/projects')
-                    .then(response => {
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e.response.data);
-                    })
-            }
-        }
+        methods: {}
     }
 </script>

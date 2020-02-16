@@ -1,5 +1,5 @@
 <template>
-    <div class="sm-flex sm-h-100 sm-bg-grey-1">
+    <div class="sm-flex sm-vh-100 sm-bg-grey-1">
 
         <client-main-menu/>
 

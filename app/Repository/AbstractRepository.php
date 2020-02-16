@@ -52,14 +52,13 @@ abstract class AbstractRepository
 
     /**
      * @param array $data
-     * @param int $page
      * @return LengthAwarePaginator|Builder[]|Collection
      */
-    public function all(array $data = [], int $page = null)
+    public function all(array $data = [])
     {
-        if ($page) {
+        if (isset($data['page'])) {
 
-            return $this->query->paginate($page ?? 25);
+            return $this->query->paginate($data['page'] ?? 25);
         }
 
         return $this->query->get();
