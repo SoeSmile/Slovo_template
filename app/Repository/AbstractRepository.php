@@ -58,7 +58,7 @@ abstract class AbstractRepository
     {
         if (isset($data['count'])) {
 
-            return $this->query->paginate($data['count'] ?? 25);
+            return $this->query->paginate($data['count'] ?? 20);
         }
 
         return $this->query->get();

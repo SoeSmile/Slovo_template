@@ -22,7 +22,7 @@ export const mutations = {
      * @constructor
      */
     SET_PAGINATE(state, data = {}) {
-        state.paginate = data.meta;
+        state.paginate = data.meta || {};
     }
 };
 
@@ -45,8 +45,6 @@ export const actions = {
             commit('SET_PAGINATE', response.data);
         }
         catch (e) {
-            // todo make error handler
-            console.log(e.response.data);
         }
     }
 };

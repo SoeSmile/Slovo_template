@@ -9,6 +9,11 @@ export default {
         ]
     },
 
+    loading: {
+        color: '#2980b9',
+        height: '5px'
+    },
+
     cache: true,
 
     css: [

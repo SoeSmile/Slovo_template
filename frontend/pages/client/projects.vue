@@ -58,7 +58,7 @@
         },
 
         created() {
-            this.$store.dispatch('project/getProjects', {count: 5});
+            this.$store.dispatch('project/getProjects', {count: 20});
         },
 
         mounted() {
