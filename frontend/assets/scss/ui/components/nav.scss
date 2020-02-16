@@ -1,0 +1,42 @@
+.#{$prefix}nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: map_get($sizes, 2);
+  width: 100%;
+  justify-content: space-between;
+
+  & .start {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
+
+  & .end {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+  }
+
+  & .item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: map_get($sizes, 3);
+    padding-right: map_get($sizes, 3);
+    cursor: pointer;
+
+    &.link {
+      &:hover {
+        opacity: 0.6;
+        @include animateHover;
+      }
+    }
+
+    & i {
+      margin-right: map_get($sizes, 1);
+    }
+  }
+}

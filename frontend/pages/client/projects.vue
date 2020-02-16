@@ -1,8 +1,33 @@
 <template>
     <div class="sm-flex wrap wrap-start top sm-w-100">
 
-        <div class="sm-flex sm-w-100 sm-p-3 sm-bg-white">
-            Hello
+        <div class="sm-nav sm-bg-blue sm-color-white sm-mb-2">
+            <div class="start">
+                <div class="item link">
+                    <i class="mdi mdi-plus-circle"></i>
+                    Add
+                </div>
+                <div class="item link">
+                    <i class="mdi mdi-pencil"></i>
+                    Edit
+                </div>
+                <div class="item link">
+                    <i class="mdi mdi-trash-can"></i>
+                    Delete
+                </div>
+                <div class="item link">
+                    <i class="mdi mdi-eye"></i>
+                    Show
+                </div>
+            </div>
+            <div class="end">
+                <div class="item">
+                    <i class="mdi mdi-search-web"></i>
+                </div>
+                <div class="item">
+                    <ui-input view="white"/>
+                </div>
+            </div>
         </div>
 
         <div class="sm-flex col sm-p-3 sm-bg-white sm-w-100">
@@ -49,7 +74,7 @@
     export default {
         name: "projects",
 
-        layout: 'layoutClient',
+        layout: 'client',
 
         head() {
             return {

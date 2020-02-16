@@ -3,6 +3,12 @@
   border-spacing: 0;
 
   & thead {
+    @each $key, $value in $mobile {
+      @media only screen and (max-width: $value) {
+        display: none;
+      }
+    }
+
     & tr {
       & th {
         font-family: $fontBold;
@@ -25,6 +31,13 @@
 
   & tbody {
     & tr {
+      @each $key, $value in $mobile {
+        @media only screen and (max-width: $value) {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
       &.hover {
         &:hover {
           background-color: map_get($colors, 'grey-5');

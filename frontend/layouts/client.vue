@@ -24,7 +24,7 @@
 
 
     export default {
-        name: "layoutClient",
+        name: "client",
 
         middleware: ['auth'],
 

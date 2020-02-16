@@ -29,7 +29,7 @@
     export default {
         name: "index",
 
-        layout: 'layoutClient',
+        layout: 'client',
 
         head() {
             return {

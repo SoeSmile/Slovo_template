@@ -74,7 +74,8 @@
                     default: 'sm-input blue',
                     error  : 'sm-input red',
                     warning: 'sm-input orange',
-                    dark   : 'sm-input dark'
+                    dark   : 'sm-input dark',
+                    white  : 'sm-input white'
                 }
             }
         },
