@@ -15,7 +15,7 @@
     }
 
     & .item {
-      padding: map_get($sizes, 2);
+      padding: 0.6rem 0.5rem 0.5rem 0.5rem;
       margin-right: map_get($sizes, 1);
       background: map_get($colors, 'grey-1');
       cursor: pointer;

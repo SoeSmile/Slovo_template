@@ -46,7 +46,7 @@
             },
             view    : {
                 type   : String,
-                default: ''
+                default: 'grey1'
             },
             items   : {
                 type   : Array,
@@ -75,7 +75,8 @@
                     orange: 'border orange',
                     teal  : 'border teal',
                     grey  : 'border grey',
-                    dark  : 'border dark'
+                    dark  : 'border dark',
+                    grey1 : 'border grey-1'
                 }
             }
         },

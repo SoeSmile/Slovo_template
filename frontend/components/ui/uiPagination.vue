@@ -27,7 +27,7 @@
                    v-model="count"
                    @onSelect="changePage"
                    class="sm-mt-1"
-                   view="grey-1"/>
+                   view="grey1"/>
     </div>
 </template>
 
