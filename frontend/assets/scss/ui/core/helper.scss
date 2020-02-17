@@ -31,3 +31,12 @@
 .#{$prefix}hide {
   display: none !important;
 }
+
+// link
+.#{$prefix}link {
+  cursor: pointer;
+
+  &:hover{
+    opacity: 0.6;
+  }
+}

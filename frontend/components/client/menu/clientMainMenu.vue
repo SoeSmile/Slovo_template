@@ -1,10 +1,10 @@
 <template>
-    <div class="sm-flex col sm-bg-dark sm-color-white sm-p-3"
-         :class="showMenu ? 'sm-wpx-250' : 'sm-wpx-50'">
+    <div class="sm-flex col sm-bg-dark sm-color-white sm-p-3 cs-client-menu"
+         :class="showMenu ? 'full' : 'short'">
 
-        <div class="sm-flex right">
+        <div class="sm-flex right sm-mobile-hide">
             <i class="mdi mdi-menu cs-link-menu-head fnt-size-3"
-               @click="showMenu=!showMenu"></i>
+               @click="showMenu = !showMenu"></i>
         </div>
 
         <n-link v-for="(val,key) in menus"
