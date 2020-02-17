@@ -26,6 +26,7 @@ export default {
     plugins: [
         '~/plugins/ui.js',
         '~/plugins/trans.js',
+        '~/plugins/mixin.js',
         '~/plugins/axios'
     ],
 

@@ -1,34 +1,33 @@
 <template>
-    <div class="ui-paginate right color-6 ui-p-3">
+    <div class="sm-paginate">
         <ul>
-            <li class="ui-color-white"
+            <li class="item"
                 v-if="pagination.current_page >= 3"
                 @click="changePage(1)">
                 1
             </li>
-            <li class="ui-color-white"
+            <li class="item"
                 v-for="(val,key) in pages" @click="changePage(val)"
                 :class="val === pagination.current_page ? 'active' : ''">
                 {{ val }}
             </li>
-            <li class="ui-color-white"
+            <li class="more"
                 v-if="pagination.current_page < pagination.last_page - 2 && pagination.current_page <= pagination.last_page - 3">
                 .....
             </li>
-            <li class="ui-color-white"
+            <li class="item"
                 v-if="pagination.current_page <= pagination.last_page - 2"
                 @click="changePage(pagination.last_page)">
                 {{ pagination.last_page }}
             </li>
 
         </ul>
-        <select class="ui-select bd-color-20 ui-color-dark"
-                v-model="countShow"
-                @change="changePage()">
-            <option v-for="(val,key) in showList"
-                    :value="val">{{ val }}
-            </option>
-        </select>
+
+        <ui-select :items="showList"
+                   v-model="count"
+                   @onSelect="changePage"
+                   class="sm-mt-1"
+                   view="grey-1"/>
     </div>
 </template>
 
@@ -53,13 +52,27 @@
             },
             showList  : {
                 type   : Array,
-                default: () => [10, 20, 30, 40, 50, 100]
-            }
+                default: () => [
+                    {name: 10, id: 10},
+                    {name: 20, id: 20},
+                    {name: 30, id: 30},
+                    {name: 40, id: 40},
+                    {name: 50, id: 50}
+                ]
+            },
+            store     : {
+                type   : String,
+                default: ''
+            },
+            countShow : {
+                type   : Number,
+                default: 20
+            },
         },
 
         data() {
             return {
-                countShow: 20,
+                count: this.countShow
             }
         },
 
@@ -89,7 +102,9 @@
              * @param page
              */
             changePage(page) {
-                console.log(page);
+                if (this.store) {
+                    this.$store.dispatch(this.store, {count: this.count, page: page});
+                }
             }
         }
     }

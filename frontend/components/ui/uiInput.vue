@@ -2,13 +2,14 @@
     <div class="sm-block">
 
         <input class="fnt-light sm-p-2"
-               :class="classes[view] ? classes[view] : classes.default"
+               :class="classes[view] ? classes[view] : classes.blue"
                :type="type"
                :value="value"
                :autocomplete="inputAutocomplete"
                :placeholder="placeholder"
                @keyup.enter="onSubmit"
-               @input="updateIt($event.target.value)">
+               @input="updateIt($event.target.value)"
+               :disabled="disabled">
 
         <div class="sm-input-error">
             <div class="animated fadeIn" v-if="viewErrors">
@@ -66,6 +67,10 @@
                 default: () => {
                 }
             },
+            disabled    : {
+                type   : Boolean,
+                default: false
+            }
         },
 
         data() {

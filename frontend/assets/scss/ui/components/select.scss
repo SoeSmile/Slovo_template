@@ -1,0 +1,46 @@
+.#{$prefix}select {
+  position: relative;
+  display: inline-flex;
+
+  & select {
+    display: inline-flex;
+    cursor: pointer;
+    outline: 0;
+    border-radius: 0;
+    appearance: none;
+    border: 0;
+    padding: map_get($sizes, 2) map_get($sizes, 5) map_get($sizes, 2) map_get($sizes, 2);
+    background: map_get($colors,'grey-1');
+    color: map_get($colors, 'dark');
+
+    &::-ms-expand {
+      display: none
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+
+    &.border {
+      border: 1px solid;
+      @include bd_color;
+    }
+  }
+
+  & .arrow {
+    position: absolute;
+    top: map_get($sizes, 4);
+    right: map_get($sizes, 2);
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    border-style: solid;
+    border-width: 8px 5px 0 5px;
+    border-color: #7b7b7b transparent transparent transparent;
+  }
+}

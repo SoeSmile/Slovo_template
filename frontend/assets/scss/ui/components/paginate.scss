@@ -1,0 +1,32 @@
+.#{$prefix}paginate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: map_get($sizes, 3);
+  color: map_get($colors, 'dark');
+
+  & ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .more {
+      padding: map_get($sizes, 2);
+    }
+
+    & .item {
+      padding: map_get($sizes, 2);
+      margin-right: map_get($sizes, 1);
+      background: map_get($colors, 'grey-1');
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.6;
+      }
+
+      &.active {
+        font-family: $fontBold;
+      }
+    }
+  }
+}

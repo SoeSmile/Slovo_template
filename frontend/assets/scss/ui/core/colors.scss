@@ -34,6 +34,7 @@ $mainColors: (
         'teal':#009688,
         'grey':#9E9E9E,
         'dark':#34495e,
+        'grey-1':#ecf0f1,
 );
 
 @each $name, $value in $colors {

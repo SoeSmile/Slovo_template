@@ -57,7 +57,9 @@
                 <tfoot></tfoot>
             </table>
 
-            <ui-pagination :pagination="paginate"/>
+            <ui-pagination :pagination="paginate"
+                           :count-show="10"
+                           store="project/getProjects"/>
         </div>
 
         <client-project-view :project="project"/>
@@ -84,7 +86,7 @@
         },
 
         created() {
-            this.$store.dispatch('project/getProjects', {count: 20});
+            this.$store.dispatch('project/getProjects', {count: 10});
         },
 
         mounted() {

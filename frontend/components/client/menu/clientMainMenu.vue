@@ -45,7 +45,7 @@
                     {name: 'menu_client.back_on_site', icon: 'arrow-left', link: '/', show: true},
                     {name: 'menu.home', icon: 'home', link: '/client', show: true},
                     {name: 'project.projects', icon: 'domain', link: '/client/projects', show: true},
-                    {name: 'menu_client.new_order', icon: 'plus-box', link: '/1', show: true},
+                    {name: 'menu_client.new_order', icon: 'plus-box', link: '/client/order', show: true},
                     {name: 'menu_client.orders', icon: 'file-multiple', link: '/2', show: true},
                     {name: 'all.history', icon: 'history', link: '/3', show: true},
                     {name: 'all.reports', icon: 'file-chart', link: '/4', show: true},
