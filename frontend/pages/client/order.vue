@@ -6,6 +6,11 @@
 
                 <ui-select :items="items"/>
 
+
+                <ui-checkbox label="Hello" v-model="check" :onChange="test"/>
+
+                <ui-checkbox label="Hello" v-model="check1" :disabled="true"/>
+
             </div>
         </div>
 
@@ -34,12 +39,14 @@
 
         data() {
             return {
-                items: [
+                items : [
                     {name: 'Hello-1', value: 1},
                     {name: 'Hello-2', value: 2},
                     {name: 'Hello-3', value: 3},
                     {name: 'Hello-4', value: 4}
-                ]
+                ],
+                check : false,
+                check1: true
             }
         },
 
@@ -47,6 +54,10 @@
 
         watch: {},
 
-        methods: {}
+        methods: {
+            test() {
+                console.log('test');
+            }
+        }
     }
 </script>

@@ -5,6 +5,7 @@ import uiAlert from "../components/ui/uiAlert";
 import uiPagination from "../components/ui/uiPagination";
 import uiModal from "../components/ui/uiModal";
 import uiSelect from "../components/ui/uiSelect";
+import uiCheckbox from "../components/ui/uiCheckbox";
 
 
 const components = {
@@ -12,7 +13,8 @@ const components = {
     uiAlert,
     uiPagination,
     uiModal,
-    uiSelect
+    uiSelect,
+    uiCheckbox
 };
 
 for (let name in components) {

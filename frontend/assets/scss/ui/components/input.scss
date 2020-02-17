@@ -9,7 +9,7 @@
 
   &:focus {
     background: map_get($colors, 'white');
-    transition: all 1s cubic-bezier(.25, .8, .25, 1);
+    @include animateHover;
   }
 }
 

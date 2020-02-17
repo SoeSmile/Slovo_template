@@ -5,19 +5,15 @@
             <div class="start">
                 <div class="item link" @click="project.show = true">
                     <i class="mdi mdi-plus-circle sm-mr-1"></i>
-                    Add
+                    {{ trans.all.add }}
                 </div>
                 <div class="item link">
                     <i class="mdi mdi-pencil sm-mr-1"></i>
-                    Edit
+                    {{ trans.all.edit }}
                 </div>
                 <div class="item link">
                     <i class="mdi mdi-trash-can sm-mr-1"></i>
-                    Delete
-                </div>
-                <div class="item link">
-                    <i class="mdi mdi-eye sm-mr-1"></i>
-                    Show
+                    {{ trans.all.delete }}
                 </div>
             </div>
             <div class="end">

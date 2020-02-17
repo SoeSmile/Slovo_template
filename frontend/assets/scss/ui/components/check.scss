@@ -1,0 +1,34 @@
+// Checkbox
+input[type=checkbox] {
+  display: none;
+}
+
+.#{$prefix}checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover, &:focus {
+    opacity: 0.5;
+    @include animateHover;
+  }
+
+  &:before {
+    content: '\F131';
+    font-size: 1.4rem;
+    font-family: "Material Design Icons", serif;
+    margin-right: 0.25rem;
+  }
+
+  input[type=checkbox]:checked + &:before {
+    content: "\FC2E";
+  }
+
+  @include bd_text_color;
+
+  input[type=checkbox]:disabled + & {
+    pointer-events: none;
+  }
+}

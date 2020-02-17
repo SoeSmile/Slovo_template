@@ -66,7 +66,16 @@ $mainColors: (
 @mixin text_color() {
   @each $name, $value in $mainColors {
     &.#{$name} {
+      color: $value;
+    }
+  }
+}
+
+@mixin bd_text_color() {
+  @each $name, $value in $mainColors {
+    &.#{$name} {
       border-color: $value;
+      color: $value;
     }
   }
 }
