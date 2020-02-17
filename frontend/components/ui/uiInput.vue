@@ -44,7 +44,7 @@
                 type   : String
             },
             view        : {
-                default: 'default',
+                default: 'blue',
                 type   : String
             },
             register    : {
@@ -71,11 +71,13 @@
         data() {
             return {
                 classes: {
-                    default: 'sm-input blue',
-                    error  : 'sm-input red',
-                    warning: 'sm-input orange',
-                    dark   : 'sm-input dark',
-                    white  : 'sm-input white'
+                    white : 'sm-input white',
+                    blue  : 'sm-input blue',
+                    red   : 'sm-input red',
+                    orange: 'sm-input orange',
+                    teal  : 'sm-input teal',
+                    grey  : 'sm-input grey',
+                    dark  : 'sm-input dark'
                 }
             }
         },

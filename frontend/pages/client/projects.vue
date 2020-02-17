@@ -3,28 +3,26 @@
 
         <div class="sm-nav sm-bg-blue sm-color-white sm-mb-2">
             <div class="start">
-                <div class="item link">
-                    <i class="mdi mdi-plus-circle"></i>
+                <div class="item link" @click="project.show = true">
+                    <i class="mdi mdi-plus-circle sm-mr-1"></i>
                     Add
                 </div>
                 <div class="item link">
-                    <i class="mdi mdi-pencil"></i>
+                    <i class="mdi mdi-pencil sm-mr-1"></i>
                     Edit
                 </div>
                 <div class="item link">
-                    <i class="mdi mdi-trash-can"></i>
+                    <i class="mdi mdi-trash-can sm-mr-1"></i>
                     Delete
                 </div>
                 <div class="item link">
-                    <i class="mdi mdi-eye"></i>
+                    <i class="mdi mdi-eye sm-mr-1"></i>
                     Show
                 </div>
             </div>
             <div class="end">
                 <div class="item">
-                    <i class="mdi mdi-search-web"></i>
-                </div>
-                <div class="item">
+                    <i class="mdi mdi-folder-search-outline fnt-size-3 sm-mr-2"></i>
                     <ui-input view="white"/>
                 </div>
             </div>
@@ -62,17 +60,20 @@
             <ui-pagination :pagination="paginate"/>
         </div>
 
-        <div class="sm-flex sm-w-100 sm-p-3 sm-bg-white">
-            Hello
-        </div>
-
+        <client-project-view :project="project"/>
     </div>
 </template>
 
 <script>
+    import clientProjectView from "../../components/client/project/clientProjectView";
+
 
     export default {
         name: "projects",
+
+        components: {
+            clientProjectView
+        },
 
         layout: 'client',
 
@@ -92,7 +93,12 @@
         props: {},
 
         data() {
-            return {}
+            return {
+                project: {
+                    show: false,
+                    data: {}
+                }
+            }
         },
 
         computed: {
