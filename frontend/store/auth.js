@@ -19,7 +19,7 @@ export const mutations = {
         // set head
         this.$axios.setToken(data.token, 'Bearer');
         // set cookie
-        this.$cookies.set('token', data.token, {maxAge: data.expiresIn});
+        this.$cookies.set('token', data.token, {maxAge: data.expiresIn, path: '/'});
     },
     /**
      * set user
@@ -38,6 +38,17 @@ export const mutations = {
      */
     SET_ERRORS(state, errors = {}) {
         state.errors = errors;
+    },
+    /**
+     * clear user and token
+     * @param state
+     * @constructor
+     */
+    CLEAR_TOKEN(state) {
+        state.token     = null;
+        state.expiresIn = null;
+        state.user      = {};
+        this.$cookies.remove('token', {path: '/'});
     }
 };
 
@@ -83,9 +94,7 @@ export const actions = {
     async logout({commit}) {
         try {
             await this.$axios.post('api/logout');
-            commit('SET_USER');
-            commit('SET_TOKEN');
-            this.$cookies.remove('token');
+            commit('CLEAR_TOKEN');
 
             return this.$router.push('/')
         }
@@ -99,9 +108,7 @@ export const actions = {
      * @return {*|number}
      */
     clearUser({commit}) {
-        commit('SET_USER');
-        commit('SET_TOKEN');
-        this.$cookies.remove('token');
+        commit('CLEAR_TOKEN');
 
         return this.$router.push('/')
     }
