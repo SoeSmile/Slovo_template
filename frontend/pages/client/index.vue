@@ -1,22 +1,22 @@
 <template>
     <div class="sm-block sm-w-100">
         <div class="sm-flex wrap sm-w-100">
-            <div class="sm-w-25">
+            <div class="sm-col-4">
                 <div class="sm-bg-white sm-m-2 sm-p-2">
                     Hello
                 </div>
             </div>
-            <div class="sm-w-25">
+            <div class="sm-col-4">
                 <div class="sm-bg-white sm-m-2 sm-p-2">
                     Hello
                 </div>
             </div>
-            <div class="sm-w-25">
+            <div class="sm-col-4">
                 <div class="sm-bg-white sm-m-2 sm-p-2">
                     Hello
                 </div>
             </div>
-            <div class="sm-w-25">
+            <div class="sm-col-4">
                 <div class="sm-bg-white sm-m-2 sm-p-2">
                     Hello
                 </div>

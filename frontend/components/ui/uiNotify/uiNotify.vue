@@ -1,16 +1,15 @@
 <template>
     <div class="sm-notify animated fadeInDown"
-         :class="classes[view] ? classes[view] : classes.default"
-         v-if="show">
+         :class="classes[storeData.view] ? classes[storeData.view] : classes.teal"
+         v-if="storeShow">
 
         <div class="content"
-             v-html="message">
+             v-html="storeData.message">
         </div>
 
         <div class="close" @click="close">
             <i class="mdi mdi-close"></i>
         </div>
-
     </div>
 </template>
 
@@ -21,40 +20,14 @@
         created() {
         },
 
-        beforeMount() {
-            document.body.appendChild(this.$el);
-        },
+        beforeMount() {},
 
-        mounted() {
-            let self = this;
+        mounted() {},
 
-            setTimeout(function () {
-                self.close();
-            }, self.time);
-        },
-
-        props: {
-            view   : {
-                default: 'teal',
-                type   : String
-            },
-            message: {
-                default: ''
-            },
-            time   : {
-                default: 3000,
-                type   : Number
-            },
-            show   : {
-                default: true,
-                type   : Boolean
-            }
-        },
+        props: {},
 
         data() {
             return {
-                show: true,
-
                 classes: {
                     white : 'sm-bg-white sm-color-dark',
                     blue  : 'sm-bg-blue sm-color-white',
@@ -67,7 +40,14 @@
             }
         },
 
-        computed: {},
+        computed: {
+            storeShow() {
+                return this.$store.getters['notify/show'];
+            },
+            storeData() {
+                return this.$store.getters['notify/data'];
+            }
+        },
 
         watch: {},
 
@@ -76,12 +56,7 @@
              * close
              */
             close() {
-                this.show = false;
-
-                setTimeout(() => {
-                    this.$destroy();
-                    this.$el.remove();
-                }, 300)
+                this.$store.dispatch('notify/closeNotify')
             }
         }
     }

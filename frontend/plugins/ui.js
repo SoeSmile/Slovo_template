@@ -26,4 +26,3 @@ for (let name in components) {
 }
 
 Vue.prototype.$dialog = uiDialog;
-Vue.prototype.$notify = uiNotify;

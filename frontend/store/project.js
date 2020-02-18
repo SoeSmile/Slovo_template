@@ -88,15 +88,19 @@ export const actions = {
      * store new project
      *
      * @param commit
-     * @param state
+     * @param dispatch
+     * @param rootState
      * @param data
      * @return {Promise<void>}
      */
-    async storeProject({commit}, data) {
+    async storeProject({commit, dispatch, rootState}, data) {
         try {
             const response = await this.$axios.post('../api/projects', data);
             commit('STORE_PROJECT', response.data);
+
+            dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
+
         catch (e) {
         }
     },
@@ -104,13 +108,16 @@ export const actions = {
      * update project
      *
      * @param dispatch
+     * @param rootState
      * @param data
      * @return {Promise<void>}
      */
-    async updateProject({dispatch}, data) {
+    async updateProject({dispatch, rootState}, data) {
         try {
             await this.$axios.put('../api/projects/' + data.id, data);
             dispatch('getProjects');
+
+            dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
         catch (e) {
         }
@@ -119,13 +126,16 @@ export const actions = {
      * delete projects
      *
      * @param dispatch
+     * @param rootState
      * @param data
      * @return {Promise<void>}
      */
-    async deleteProject({dispatch}, data) {
+    async deleteProject({dispatch, rootState}, data) {
         try {
             await this.$axios.post('../api/projects/delete', {ids: data});
             dispatch('getProjects');
+
+            dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
         catch (e) {
         }

@@ -1,5 +1,6 @@
 <template>
     <div class="sm-flex sm-vh-100 sm-bg-grey-1">
+        <ui-notify/>
 
         <client-main-menu/>
 

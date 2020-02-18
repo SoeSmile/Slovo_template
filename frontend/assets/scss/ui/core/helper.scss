@@ -6,6 +6,18 @@
   }
 }
 
+// col
+$col: 12;
+$wight: 100%;
+$colum: $wight/$col;
+
+@for $i from 1 through $col {
+  .#{$prefix}col-#{$i} {
+    width: $colum*$i;
+  }
+}
+
+
 // Width in px
 @for $i from 1 through 20 {
   $value: $i * 50;

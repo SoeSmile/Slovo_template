@@ -31,12 +31,9 @@ export const actions = {
      */
     async nuxtServerInit({commit}, {app, store, redirect}) {
 
-        state.Snotify = app.$notify;
-
         // translate
         const response = await this.$axios.get('http://nginx/api/lang');
         commit('SET_LANG', response.data.data);
-
 
         // user && token
         const token = app.$cookies.get('token');

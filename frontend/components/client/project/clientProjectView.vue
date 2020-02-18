@@ -10,12 +10,16 @@
                     {{ trans.project.name }}
                 </div>
                 <ui-input :placeholder="trans.project.name"
+                          :view="error.name ? 'red' : ''"
+                          :errors="error.name ? lang('warning.required_field') : ''"
+                          :on-submit="store"
                           v-model="project.data.name"/>
 
                 <div class="sm-mb-1 sm-mt-3">
                     {{ trans.project.url }}
                 </div>
                 <ui-input :placeholder="trans.project.url"
+                          :on-submit="store"
                           v-model="project.data.url"/>
 
             </template>
@@ -48,7 +52,11 @@
         },
 
         data() {
-            return {}
+            return {
+                error: {
+                    name: false
+                }
+            }
         },
 
         computed: {},
@@ -60,18 +68,36 @@
              * show/hide popup
              */
             showHide() {
+                this.error        = {
+                    name: false
+                };
                 this.project.data = {};
                 this.project.show = !this.project.show;
             },
             /**
+             * validator
+             */
+            validate() {
+                if (!this.project.data.name) {
+
+                    this.error.name = true;
+                }
+
+                return this.project.data.name;
+            },
+
+            /**
              * store project
              */
             store() {
+                if (!this.validate()) return false;
+
                 if (this.project.data.id) {
                     this.$store.dispatch('project/updateProject', this.serializeData(this.project.data));
                 } else {
                     this.$store.dispatch('project/storeProject', this.serializeData(this.project.data));
                 }
+
                 this.showHide();
             },
 
