@@ -12,7 +12,8 @@
                     <i class="mdi mdi-plus-circle sm-mr-1"></i>
                     {{ trans.all.add }}
                 </div>
-                <div class="item link">
+                <div class="item link"
+                     @click="edit">
                     <i class="mdi mdi-pencil sm-mr-1"></i>
                     {{ trans.all.edit }}
                 </div>
@@ -114,6 +115,7 @@
         computed: {
             /**
              * projects
+             *
              * @return {*}
              */
             projects() {
@@ -121,6 +123,7 @@
             },
             /**
              * paginate
+             *
              * @return {*}
              */
             paginate() {
@@ -141,6 +144,22 @@
                     this.selected.splice(this.selected.indexOf(id), 1);
                 } else {
                     this.selected.push(id);
+                }
+            },
+            /**
+             * edit project
+             *
+             * @param key
+             */
+            edit(key) {
+                if (this.selected.length > 0) {
+
+                    const item = this.projects.find((el) => {
+                        return el.id === this.selected[this.selected.length - 1];
+                    });
+
+                    this.project.data = {...item};
+                    this.project.show = true;
                 }
             },
             /**

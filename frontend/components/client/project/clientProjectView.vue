@@ -2,7 +2,7 @@
     <section v-if="project.show">
         <ui-modal :onClose="showHide" view="teal">
             <template v-slot:header>
-                {{ trans.all.add }}
+                {{ project.data.name ? trans.all.edit : trans.all.add }}
             </template>
             <template v-slot:content>
 
@@ -21,7 +21,7 @@
             </template>
             <template v-slot:foot>
                 <div class="sm-button sm-bg-teal sm-color-white"
-                     @click="save">
+                     @click="store">
                     {{ trans.all.save }}
                 </div>
             </template>
@@ -63,9 +63,30 @@
                 this.project.data = {};
                 this.project.show = !this.project.show;
             },
+            /**
+             * store project
+             */
+            store() {
+                if (this.project.data.id) {
+                    this.$store.dispatch('project/updateProject', this.serializeData(this.project.data));
+                } else {
+                    this.$store.dispatch('project/storeProject', this.serializeData(this.project.data));
+                }
+                this.showHide();
+            },
 
-            save() {
-
+            /**
+             * prepare data for store
+             *
+             * @param item
+             * @return {{name: *, id: (*|null), url: string}}
+             */
+            serializeData(item) {
+                return {
+                    id  : item.id || null,
+                    name: item.name,
+                    url : item.url
+                }
             }
         }
     }

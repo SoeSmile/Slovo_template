@@ -9,6 +9,7 @@ export const state = () => (
 export const mutations = {
     /**
      * set projects
+     *
      * @param state
      * @param data
      * @constructor
@@ -18,6 +19,7 @@ export const mutations = {
     },
     /**
      * set paginate
+     *
      * @param state
      * @param data
      * @constructor
@@ -27,6 +29,7 @@ export const mutations = {
     },
     /**
      * set query
+     *
      * @param state
      * @param data
      * @constructor
@@ -42,6 +45,16 @@ export const mutations = {
         if (data === 'reset') {
             state.query = {count: 20}
         }
+    },
+    /**
+     * push new project
+     *
+     * @param state
+     * @param data
+     * @constructor
+     */
+    STORE_PROJECT(state, data) {
+        state.projects.push(data);
     }
 };
 
@@ -53,6 +66,7 @@ export const getters = {
 export const actions = {
     /**
      * get projects
+     *
      * @param commit
      * @param state
      * @param request
@@ -69,5 +83,37 @@ export const actions = {
         }
         catch (e) {
         }
-    }
+    },
+    /**
+     * store new project
+     *
+     * @param commit
+     * @param state
+     * @param data
+     * @return {Promise<void>}
+     */
+    async storeProject({commit, state}, data) {
+        try {
+            const response = await this.$axios.post('../api/projects', data);
+            commit('STORE_PROJECT', response.data);
+        }
+        catch (e) {
+        }
+    },
+    /**
+     * update project
+     *
+     * @param dispatch
+     * @param data
+     * @return {Promise<void>}
+     */
+    async updateProject({dispatch}, data) {
+        try {
+            await this.$axios.put('../api/projects/' + data.id, data);
+            dispatch('getProjects');
+        }
+        catch (e) {
+        }
+    },
+
 };

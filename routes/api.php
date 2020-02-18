@@ -1,7 +1,7 @@
 <?php
 
 // todo remove only for test
-Route::get('test','TestController@index');
+Route::get('test', 'TestController@index');
 
 Route::group(['namespace' => 'Api'], static function () {
 
@@ -21,7 +21,7 @@ Route::group(['namespace' => 'Api'], static function () {
         Route::post('me', 'Auth\ApiAuthController@me')->name('api.auth.me');
 
         // Projects
-        Route::apiResource('projects', 'ApiProjectController')->only('index');
+        Route::apiResource('projects', 'ApiProjectController')->only('index', 'store', 'update');
     });
 
 });
