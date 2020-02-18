@@ -45,7 +45,8 @@
                 <tr class="hover click"
                     v-for="(val,key) in projects"
                     :key="key"
-                    @click="select(val.id)">
+                    @click="select(val.id)"
+                    :class="{'use' : selected.includes(val.id)}">
                     <td>
                         <ui-checkbox view="blue"
                                      :native-value="val.id"
