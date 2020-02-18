@@ -92,7 +92,7 @@ export const actions = {
      * @param data
      * @return {Promise<void>}
      */
-    async storeProject({commit, state}, data) {
+    async storeProject({commit}, data) {
         try {
             const response = await this.$axios.post('../api/projects', data);
             commit('STORE_PROJECT', response.data);
