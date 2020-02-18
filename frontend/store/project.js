@@ -115,5 +115,19 @@ export const actions = {
         catch (e) {
         }
     },
-
+    /**
+     * delete projects
+     *
+     * @param dispatch
+     * @param data
+     * @return {Promise<void>}
+     */
+    async deleteProject({dispatch}, data) {
+        try {
+            await this.$axios.post('../api/projects/delete', {ids: data});
+            dispatch('getProjects');
+        }
+        catch (e) {
+        }
+    },
 };

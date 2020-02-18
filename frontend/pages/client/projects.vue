@@ -175,7 +175,7 @@
                             yes     : this.trans.all.yes,
                             no      : this.trans.all.no,
                             onSubmit: () => {
-                                console.log('Hello');
+                                this.$store.dispatch('project/deleteProject', this.selected);
                             }
                         });
                 }

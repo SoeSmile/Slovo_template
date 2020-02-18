@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Project\ProjectDeleteRequest;
 use App\Http\Requests\Project\ProjectStoreRequest;
 use App\Http\Requests\Project\ProjectUpdateRequest;
 use App\Http\Resources\Project\ProjectResource;
@@ -61,6 +62,18 @@ final class ApiProjectController
     public function update($id, ProjectUpdateRequest $request): JsonResponse
     {
         $result = $this->project->update($id, $request->all());
+
+        return response()->json(['success' => (bool)$result], $result ? 200 : 400);
+    }
+
+
+    /**
+     * @param ProjectDeleteRequest $request
+     * @return JsonResponse
+     */
+    public function delete(ProjectDeleteRequest $request): JsonResponse
+    {
+        $result = $this->project->delete($request->ids);
 
         return response()->json(['success' => (bool)$result], $result ? 200 : 400);
     }

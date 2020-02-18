@@ -48,4 +48,14 @@ final class ProjectRepository extends AbstractRepository
 
         return parent::store($data);
     }
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function delete(array $data)
+    {
+        return $this->query->whereIn('id', $data)->delete();
+    }
 }

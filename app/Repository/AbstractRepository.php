@@ -100,7 +100,7 @@ abstract class AbstractRepository
      * @param $id
      * @return mixed
      */
-    public function delete($id)
+    public function destroy($id)
     {
         return $this->query->where('id', $id)->delete();
     }

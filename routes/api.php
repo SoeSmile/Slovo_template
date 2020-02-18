@@ -21,6 +21,7 @@ Route::group(['namespace' => 'Api'], static function () {
         Route::post('me', 'Auth\ApiAuthController@me')->name('api.auth.me');
 
         // Projects
+        Route::post('projects/delete', 'ApiProjectController@delete')->name('projects.delete');
         Route::apiResource('projects', 'ApiProjectController')->only('index', 'store', 'update');
     });
 
