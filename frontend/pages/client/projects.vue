@@ -3,7 +3,12 @@
 
         <div class="sm-nav sm-bg-blue sm-color-white sm-mb-2">
             <div class="start">
-                <div class="item link" @click="project.show = true">
+                <div class="item link"
+                     @click="$store.dispatch('project/getProjects', 'reset')">
+                    <i class="mdi mdi-sync sm-mr-1"></i>
+                </div>
+                <div class="item link"
+                     @click="project.show = true">
                     <i class="mdi mdi-plus-circle sm-mr-1"></i>
                     {{ trans.all.add }}
                 </div>
@@ -11,7 +16,8 @@
                     <i class="mdi mdi-pencil sm-mr-1"></i>
                     {{ trans.all.edit }}
                 </div>
-                <div class="item link">
+                <div class="item link"
+                     @click="destroy">
                     <i class="mdi mdi-trash-can sm-mr-1"></i>
                     {{ trans.all.delete }}
                 </div>
@@ -28,14 +34,11 @@
             <table class="sm-table">
                 <thead>
                 <tr>
-                    <th></th>
-                    <th class="sm-w-30">
+                    <th class="sm-w-2"></th>
+                    <th class="sm-w-40">
                         {{ this.trans.project.name }}
                     </th>
-                    <th class="sm-w-30">
-                        {{ this.trans.project.owner }}
-                    </th>
-                    <th class="sm-w-30">
+                    <th class="sm-w-40">
                         {{ this.trans.project.url }}
                     </th>
                     <th>{{ this.trans.all.additional }}</th>
@@ -53,7 +56,6 @@
                                      v-model="selected"/>
                     </td>
                     <td class="left">{{ val.name }}</td>
-                    <td>{{ val.user.login }}</td>
                     <td>{{ val.url }}</td>
                     <td>{{ val.data }}</td>
                 </tr>
@@ -90,7 +92,7 @@
         },
 
         created() {
-            this.$store.dispatch('project/getProjects', {count: 10});
+            this.$store.dispatch('project/getProjects');
         },
 
         mounted() {
@@ -140,6 +142,17 @@
                 } else {
                     this.selected.push(id);
                 }
+            },
+
+            destroy() {
+                this.$dialog.show(
+                    {
+                        head    : 'Удалить',
+                        view    : 'red',
+                        onSubmit: () => {
+                            console.log('Hello');
+                        }
+                    });
             }
         }
     }

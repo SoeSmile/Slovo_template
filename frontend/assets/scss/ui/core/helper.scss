@@ -1,6 +1,6 @@
 // Width
-@for $i from 1 through 20 {
-  $value: $i * 5;
+@for $i from 1 through 50 {
+  $value: $i * 2;
   .#{$prefix}w-#{$value} {
     width: $value*1%;
   }

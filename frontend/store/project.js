@@ -1,7 +1,8 @@
 export const state = () => (
     {
         projects: {},
-        paginate: {}
+        paginate: {},
+        query   : {count: 20},
     }
 );
 
@@ -23,6 +24,24 @@ export const mutations = {
      */
     SET_PAGINATE(state, data = {}) {
         state.paginate = data.meta || {};
+    },
+    /**
+     * set query
+     * @param state
+     * @param data
+     * @constructor
+     */
+    SET_QUERY(state, data) {
+        // если обект дополнить изменить запрос
+        if (data instanceof Object) {
+            for (let i in data) {
+                state.query[i] = data[i];
+            }
+        }
+        // сброс запроса
+        if (data === 'reset') {
+            state.query = {count: 20}
+        }
     }
 };
 
@@ -35,12 +54,16 @@ export const actions = {
     /**
      * get projects
      * @param commit
+     * @param state
      * @param request
      * @return {Promise<void>}
      */
-    async getProjects({commit}, request = {}) {
+    async getProjects({commit, state}, request = {}) {
+
+        commit('SET_QUERY', request);
+
         try {
-            const response = await this.$axios.get('../api/projects', {params: request});
+            const response = await this.$axios.get('../api/projects', {params: state.query});
             commit('SET_PROJECTS', response.data);
             commit('SET_PAGINATE', response.data);
         }

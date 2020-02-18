@@ -6,6 +6,7 @@ import uiPagination from "../components/ui/uiPagination";
 import uiModal from "../components/ui/uiModal";
 import uiSelect from "../components/ui/uiSelect";
 import uiCheckbox from "../components/ui/uiCheckbox";
+import uiDialog from "../components/ui/uiDialog";
 
 
 const components = {
@@ -14,9 +15,12 @@ const components = {
     uiPagination,
     uiModal,
     uiSelect,
-    uiCheckbox
+    uiCheckbox,
+    uiDialog
 };
 
 for (let name in components) {
     Vue.component(name, components[name]);
 }
+
+Vue.prototype.$dialog = uiDialog;

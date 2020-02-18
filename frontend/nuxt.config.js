@@ -14,7 +14,7 @@ export default {
         height: '5px'
     },
 
-    cache: true,
+    cache: false,
 
     css: [
         {

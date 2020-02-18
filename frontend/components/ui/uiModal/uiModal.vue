@@ -1,6 +1,6 @@
 <template>
     <section v-if="show">
-        <div class="sm-modal w-20 sm-bg-white animated fadeIn">
+        <div class="sm-modal wpx-400 sm-bg-white animated fadeIn">
             <div class="head"
                  :class="classes[view]">
                 <div class="text">
