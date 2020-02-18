@@ -97,6 +97,7 @@
         },
 
         mounted() {
+            this.$notify.show({message: "HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello"})
         },
 
         props: {},
