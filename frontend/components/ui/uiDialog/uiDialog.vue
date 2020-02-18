@@ -55,7 +55,7 @@
             },
             message : {
                 type   : String,
-                default: 'message'
+                default: ''
             },
             yes     : {
                 type   : String,

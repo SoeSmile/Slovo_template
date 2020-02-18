@@ -143,16 +143,23 @@
                     this.selected.push(id);
                 }
             },
-
+            /**
+             * destroy projects
+             */
             destroy() {
-                this.$dialog.show(
-                    {
-                        head    : 'Удалить',
-                        view    : 'red',
-                        onSubmit: () => {
-                            console.log('Hello');
-                        }
-                    });
+                if (this.selected.length > 0) {
+                    this.$dialog.show(
+                        {
+                            head    : this.trans.all.delete,
+                            view    : 'red',
+                            message : '<p class="sm-center">' + this.trans.warning.sure_delete + '</p>',
+                            yes     : this.trans.all.yes,
+                            no      : this.trans.all.no,
+                            onSubmit: () => {
+                                console.log('Hello');
+                            }
+                        });
+                }
             }
         }
     }
