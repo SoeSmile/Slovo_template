@@ -28,6 +28,7 @@
             <table class="sm-table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th class="sm-w-30">
                         {{ this.trans.project.name }}
                     </th>
@@ -43,7 +44,13 @@
                 <tbody>
                 <tr class="hover click"
                     v-for="(val,key) in projects"
-                    :key="key">
+                    :key="key"
+                    @click="select(val.id)">
+                    <td>
+                        <ui-checkbox view="blue"
+                                     :native-value="val.id"
+                                     v-model="selected"/>
+                    </td>
                     <td class="left">{{ val.name }}</td>
                     <td>{{ val.user.login }}</td>
                     <td>{{ val.url }}</td>
@@ -95,7 +102,9 @@
                 project: {
                     show: false,
                     data: {}
-                }
+                },
+
+                selected: [],
             }
         },
 
@@ -118,6 +127,19 @@
 
         watch: {},
 
-        methods: {}
+        methods: {
+            /**
+             * add/remove from select
+             *
+             * @param id
+             */
+            select(id) {
+                if (this.selected.includes(id)) {
+                    this.selected.splice(this.selected.indexOf(id), 1);
+                } else {
+                    this.selected.push(id);
+                }
+            }
+        }
     }
 </script>

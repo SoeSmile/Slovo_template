@@ -2,10 +2,12 @@
     <div class="sm-flex middle">
         <input :id="id"
                type="checkbox"
+               v-model="computedValue"
+               @click.stop.prevent
                :disabled="disabled"
-               :value="value || true"
-               :checked="value"
-               @change="updateIt($event.target.checked)">
+               :value="nativeValue"
+               :true-value="trueValue"
+               :false-value="falseValue">
 
         <label :for="id"
                class="sm-checkbox"
@@ -27,46 +29,56 @@
         },
 
         props: {
-            label   : {
+            label      : {
                 type   : String,
                 default: ''
             },
-            view    : {
+            view       : {
                 type   : String,
                 default: 'teal'
             },
-            disabled: {
+            disabled   : {
                 type   : Boolean,
                 default: false
             },
-            value   : null,
-            onChange: {
-                type   : Function,
-                default: () => {
-                }
-            }
+            nativeValue: true,
+            value      : true,
+            trueValue  : true,
+            falseValue : false,
         },
 
         data() {
             return {
-                id: null
+                id      : null,
+                newValue: this.value
             }
         },
 
-        computed: {},
-
-        watch: {},
-
-        methods: {
+        computed: {
             /**
-             * update value
-             *
-             * @param val
+             * value
              */
-            updateIt(val) {
-                this.$emit('input', val);
-                this.onChange();
+            computedValue: {
+                get() {
+                    return this.newValue
+                },
+                set(value) {
+                    this.newValue = value;
+                    this.$emit('input', value);
+                }
             }
-        }
+        },
+
+        watch: {
+            /**
+             * watch value
+             * @param value
+             */
+            value(value) {
+                this.newValue = value
+            }
+        },
+
+        methods: {}
     }
 </script>
