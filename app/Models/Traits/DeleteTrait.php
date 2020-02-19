@@ -17,7 +17,7 @@ trait DeleteTrait
      */
     protected static function bootDeleteTrait(): void
     {
-        static::deleting(function ($model) {
+        static::deleting(static function ($model) {
 
             if ($model->deleted) {
 
@@ -25,19 +25,11 @@ trait DeleteTrait
 
                     $type = (new ReflectionClass($model->{$value}()))->getShortName();
 
-                    switch ($type) {
-                        case 'BelongsToMany' :
-                        {
-                            $model->{$value}()->detach();
-                            break;
-                        }
-                        default:
-                        {
-                            $model->{$value}()->delete();
-                        }
-
+                    if ($type === 'BelongsToMany') {
+                        $model->{$value}()->detach();
+                    } else {
+                        $model->{$value}()->delete();
                     }
-
                 }
             }
 
