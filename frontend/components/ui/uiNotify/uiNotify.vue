@@ -20,9 +20,8 @@
         created() {
         },
 
-        beforeMount() {},
-
-        mounted() {},
+        mounted() {
+        },
 
         props: {},
 

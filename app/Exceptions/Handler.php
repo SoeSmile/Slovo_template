@@ -64,7 +64,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthorizationException) {
 
             return response()->json([
-                'message' => trans('data.warning.unauthorized')
+                'errors' => trans('data.warning.unauthorized')
             ], 403);
         }
 

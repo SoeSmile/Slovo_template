@@ -10,9 +10,9 @@
                     {{ trans.project.name }}
                 </div>
                 <ui-input :placeholder="trans.project.name"
-                          :view="error.name ? 'red' : ''"
-                          :errors="error.name ? lang('warning.required_field') : ''"
                           :on-submit="store"
+                          :view="errors.name ? 'red' : null"
+                          :errors="errors.name"
                           v-model="project.data.name"/>
 
                 <div class="sm-mb-1 sm-mt-3">
@@ -52,14 +52,17 @@
         },
 
         data() {
-            return {
-                error: {
-                    name: false
-                }
-            }
+            return {}
         },
 
-        computed: {},
+        computed: {
+            /**
+             * login errors
+             */
+            errors() {
+                return this.$store.getters['project/errors'];
+            }
+        },
 
         watch: {},
 
@@ -68,29 +71,26 @@
              * show/hide popup
              */
             showHide() {
-                this.error        = {
-                    name: false
-                };
                 this.project.data = {};
                 this.project.show = !this.project.show;
+                this.$store.dispatch('project/setErrors');
             },
-            /**
-             * validator
-             */
+
             validate() {
                 if (!this.project.data.name) {
 
-                    this.error.name = true;
+                    this.$store.dispatch('project/setErrors', {name: this.trans.warning.required_field});
+                    return false;
                 }
 
-                return this.project.data.name;
+                return true;
             },
 
             /**
              * store project
              */
             store() {
-                if (!this.validate()) return false;
+                if (!this.validate()) return;
 
                 if (this.project.data.id) {
                     this.$store.dispatch('project/updateProject', this.serializeData(this.project.data));

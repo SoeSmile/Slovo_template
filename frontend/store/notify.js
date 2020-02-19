@@ -1,3 +1,23 @@
+/**
+ * @param errors
+ * @param raw
+ * @return {string}
+ */
+function errorSerializer(errors, raw = false) {
+    if (typeof errors === 'string') return errors;
+
+    let data = raw ? '' : '<ul>';
+
+    for (let i in errors) {
+        data += raw ? errors[i] + '\n' : '<li>' + errors[i] + '</li>';
+    }
+
+    data += raw ? '' : '</ul>';
+
+    return data;
+}
+
+
 export const state = () => (
     {
         show: false,
@@ -19,7 +39,9 @@ export const mutations = {
     SET_DATA(state, data) {
         state.show = true;
         for (let i in data) {
-            state.data[i] = data[i];
+            state.data[i] = (
+                i === 'message' ? errorSerializer(data[i]) : data[i]
+            );
         }
     },
     /**

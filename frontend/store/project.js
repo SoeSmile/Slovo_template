@@ -3,6 +3,7 @@ export const state = () => (
         projects: {},
         paginate: {},
         query   : {count: 20},
+        errors  : {}
     }
 );
 
@@ -55,12 +56,23 @@ export const mutations = {
      */
     STORE_PROJECT(state, data) {
         state.projects.push(data);
+    },
+    /**
+     * ser errors
+     *
+     * @param state
+     * @param errors
+     * @constructor
+     */
+    SET_ERRORS(state, errors = {}) {
+        state.errors = errors;
     }
 };
 
 export const getters = {
     projects: s => s.projects,
-    paginate: s => s.paginate
+    paginate: s => s.paginate,
+    errors  : s => s.errors
 };
 
 export const actions = {
@@ -104,7 +116,7 @@ export const actions = {
         }
 
         catch (e) {
-            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
+            dispatch('notify/showNotify', {message: e.response.data.errors, view: 'red', time: 5000}, {root: true})
         }
     },
     /**
@@ -123,7 +135,7 @@ export const actions = {
             dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
         catch (e) {
-            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
+            dispatch('notify/showNotify', {message: e.response.data.errors, view: 'red', time: 5000}, {root: true})
         }
     },
     /**
@@ -145,4 +157,13 @@ export const actions = {
             dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
+    /**
+     * set errors
+     *
+     * @param commit
+     * @param errors
+     */
+    setErrors({commit}, errors) {
+        commit('SET_ERRORS', errors);
+    }
 };

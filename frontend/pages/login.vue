@@ -7,7 +7,7 @@
                       type="email"
                       autocomplete="on"
                       v-model="user.email"
-                      :view="errors.email ? 'error' : null"
+                      :view="errors.email ? 'red' : null"
                       :errors="errors.email"
                       :onSubmit="login"
                       :placeholder="trans.user.email"/>
@@ -16,7 +16,7 @@
                       type="password"
                       autocomplete="on"
                       v-model="user.password"
-                      :view="errors.password ? 'error' : null"
+                      :view="errors.password ? 'red' : null"
                       :errors="errors.password"
                       :onSubmit="login"
                       :placeholder="trans.user.password"/>
