@@ -16,14 +16,11 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type')->nullable()->comment('Тип роли.Коротко для перевода');
+            $table->string('type')->unique()->comment('Тип роли.Коротко для перевода');
             $table->timestamps();
         });
 
         DB::table('roles')->insert([
-            [
-                'type' => 'super_admin',
-            ],
             [
                 'type' => 'admin',
             ],
@@ -31,7 +28,7 @@ class CreateRolesTable extends Migration
                 'type' => 'new',
             ],
             [
-                'type' => 'gl_red',
+                'type' => 'client',
             ],
         ]);
     }

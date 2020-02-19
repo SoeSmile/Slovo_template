@@ -31,10 +31,10 @@ class CreateUsersTable extends Migration
 
         DB::table('users')->insert([
             'id'         => 'fc2150e4-5127-4add-bad0-2394add2c060',
-            'login'      => 'SuperAdmin',
+            'login'      => 'Admin',
             'email'      => 'admin@test.ru',
             'password'   => bcrypt('123456'),
-            'role_type'  => 'super_admin',
+            'role_type'  => 'admin',
             'confirm'    => true,
             'created_at' => now(),
             'updated_at' => now(),

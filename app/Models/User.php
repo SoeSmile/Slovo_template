@@ -58,6 +58,15 @@ class User extends Authenticatable implements JWTSubject
 
 
     /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->note === 'admin';
+    }
+
+
+    /**
      * @inheritDoc
      */
     public function getJWTIdentifier()

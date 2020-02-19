@@ -20,11 +20,11 @@ class ProjectPolicy
      * Determine whether the user can view any projects.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
 
@@ -33,11 +33,11 @@ class ProjectPolicy
      *
      * @param User $user
      * @param Project $project
-     * @return mixed
+     * @return bool
      */
-    public function view(User $user, Project $project)
+    public function view(User $user, Project $project): bool
     {
-        //
+        return true;
     }
 
 
@@ -45,11 +45,11 @@ class ProjectPolicy
      * Determine whether the user can create projects.
      *
      * @param User $user
-     * @return mixed
+     * @return bool
      */
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        //
+        return true;
     }
 
 
@@ -62,7 +62,7 @@ class ProjectPolicy
      */
     public function update(User $user, Project $project): bool
     {
-        return $user->id !== $project->user_id;
+        return $user->id === $project->user_id;
     }
 
 
@@ -71,11 +71,11 @@ class ProjectPolicy
      *
      * @param User $user
      * @param Project $project
-     * @return mixed
+     * @return bool
      */
-    public function delete(User $user, Project $project)
+    public function delete(User $user, Project $project): bool
     {
-        //
+        return $user->id === $project->user_id;
     }
 
 
@@ -84,11 +84,11 @@ class ProjectPolicy
      *
      * @param User $user
      * @param Project $project
-     * @return mixed
+     * @return bool
      */
-    public function restore(User $user, Project $project)
+    public function restore(User $user, Project $project): bool
     {
-        //
+        return $user->isAdmin();
     }
 
 
@@ -97,10 +97,10 @@ class ProjectPolicy
      *
      * @param User $user
      * @param Project $project
-     * @return mixed
+     * @return bool
      */
-    public function forceDelete(User $user, Project $project)
+    public function forceDelete(User $user, Project $project): bool
     {
-        //
+        return $user->isAdmin();
     }
 }
