@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  * Class ApiAuthController
  * @package App\Http\Controllers\Api\Auth
  */
-class ApiAuthController
+final class ApiAuthController
 {
     /**
      * @param LoginRequest $request
@@ -66,7 +66,7 @@ class ApiAuthController
      * @param $token
      * @return JsonResponse
      */
-    protected function respondWithToken($token): JsonResponse
+    private function respondWithToken($token): JsonResponse
     {
         return response()->json([
             'token'     => $token,
