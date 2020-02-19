@@ -69,10 +69,11 @@ export const actions = {
      *
      * @param commit
      * @param state
+     * @param dispatch
      * @param request
      * @return {Promise<void>}
      */
-    async getProjects({commit, state}, request = {}) {
+    async getProjects({commit, state, dispatch}, request = {}) {
 
         commit('SET_QUERY', request);
 
@@ -82,6 +83,7 @@ export const actions = {
             commit('SET_PAGINATE', response.data);
         }
         catch (e) {
+            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
     /**
@@ -102,6 +104,7 @@ export const actions = {
         }
 
         catch (e) {
+            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
     /**
@@ -120,6 +123,7 @@ export const actions = {
             dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
         catch (e) {
+            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
     /**
@@ -138,6 +142,7 @@ export const actions = {
             dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
         catch (e) {
+            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
 };

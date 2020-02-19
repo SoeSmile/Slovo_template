@@ -1,14 +1,14 @@
 .#{$prefix}notify {
   position: fixed;
   top: 0;
-  width: 300px;
+  width: 320px;
   left: 50%;
   margin-left: -150px;
   z-index: 999;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  padding: map_get($sizes, 2);
+  padding: map_get($sizes, 3);
   font-family: $fontRegular;
 
   & .content {

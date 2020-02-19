@@ -171,7 +171,7 @@
                         {
                             head    : this.trans.all.delete,
                             view    : 'red',
-                            message : '<p class="sm-center">' + this.trans.warning.sure_delete + '</p>',
+                            message : this.trans.warning.sure_delete,
                             yes     : this.trans.all.yes,
                             no      : this.trans.all.no,
                             onSubmit: () => {

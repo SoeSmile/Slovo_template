@@ -1,10 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class Handler
+ * @package App\Exceptions
+ */
 class Handler extends ExceptionHandler
 {
     /**
@@ -26,30 +34,40 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param Exception $exception
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function report(Exception $exception)
+    public function report(Exception $exception): void
     {
         parent::report($exception);
     }
 
+
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param Exception $exception
+     * @return Response
      *
-     * @throws \Exception
+     * @throws Exception
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $exception): Response
     {
+
+        if ($exception instanceof AuthorizationException) {
+
+            return response()->json([
+                'message' => trans('data.warning.unauthorized')
+            ], 403);
+        }
+
         return parent::render($request, $exception);
     }
 }

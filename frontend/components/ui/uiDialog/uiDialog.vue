@@ -10,10 +10,10 @@
                     <i class="mdi mdi-close fnt-size-3"></i>
                 </div>
             </div>
-            <div class="content">
-                <p v-html="message"></p>
+            <div class="content-dailog">
+                <p class="sm-center" v-html="message"></p>
             </div>
-            <div class="foot">
+            <div class="foot-dailog">
                 <div class="sm-button"
                      :class="classes[view]"
                      @click="submit">
