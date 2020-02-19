@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  * Class ApiAuthController
  * @package App\Http\Controllers\Api\Auth
  */
-final class ApiAuthController
+class ApiAuthController
 {
     /**
      * @param LoginRequest $request

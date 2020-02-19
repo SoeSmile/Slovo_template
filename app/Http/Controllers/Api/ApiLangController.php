@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
  * Class ApiLangController
  * @package App\Http\Controllers\Api
  */
-final class ApiLangController
+class ApiLangController
 {
     /**
      * @return JsonResponse

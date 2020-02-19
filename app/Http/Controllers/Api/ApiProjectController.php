@@ -16,7 +16,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
  * Class ApiProjectController
  * @package App\Http\Controllers\Api
  */
-final class ApiProjectController
+class ApiProjectController
 {
     /**
      * @var ProjectRepository
