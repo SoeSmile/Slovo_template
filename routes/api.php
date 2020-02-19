@@ -24,5 +24,4 @@ Route::group(['namespace' => 'Api'], static function () {
         Route::post('projects/delete', 'ApiProjectController@delete')->name('projects.delete');
         Route::apiResource('projects', 'ApiProjectController')->only('index', 'store', 'update');
     });
-
 });

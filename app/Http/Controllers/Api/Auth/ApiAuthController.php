@@ -20,7 +20,6 @@ class ApiAuthController
     public function login(LoginRequest $request): JsonResponse
     {
         if (!$token = auth()->attempt($request->all())) {
-
             return response()->json([
                 'errors' =>
                     [

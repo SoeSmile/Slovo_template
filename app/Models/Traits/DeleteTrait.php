@@ -20,9 +20,7 @@ trait DeleteTrait
         static::deleting(static function ($model) {
 
             if ($model->deleted) {
-
                 foreach ($model->deleted as $value) {
-
                     $type = (new ReflectionClass($model->{$value}()))->getShortName();
 
                     if ($type === 'BelongsToMany') {
@@ -32,7 +30,6 @@ trait DeleteTrait
                     }
                 }
             }
-
         });
     }
 }

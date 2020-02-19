@@ -7,6 +7,5 @@ class ApiRegisterController
 {
     public function register()
     {
-
     }
 }
