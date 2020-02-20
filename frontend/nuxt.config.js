@@ -10,7 +10,7 @@ export default {
     },
 
     loading: {
-        color: '#2980b9',
+        color : '#2980b9',
         height: '5px'
     },
 
@@ -38,8 +38,8 @@ export default {
     axios: {
         baseURL: "./",
         headers: {
-            'Accept': 'application/json',
-            'X-common' : 'c23050c2-45e5-41d3-8b84-e23d6e533ea8'
+            'Accept'  : 'application/json',
+            'X-common': 'c23050c2-45e5-41d3-8b84-e23d6e533ea8'
         }
     },
 
