@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e85214ea595209e7ad6118e42dbff02",
+    "content-hash": "fc8c8cf94f9648b05139000acd11d936",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
@@ -1872,6 +1872,49 @@
                 "uuid"
             ],
             "time": "2019-12-17T08:18:51+00:00"
+        },
+        {
+            "name": "soe-smile/content-watch",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/soe-smile/content-watch",
+                "reference": "23cfc29c6ebca01e4bfb3438f7136a9bdd72a3ff"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SoeSmile\\ContentWatch\\ContentWatchServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SoeSmile\\ContentWatch\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "SoeSmile\\ContentWatch\\Tests\\": "tests/"
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oleg",
+                    "email": "soe190715@gmail.com"
+                }
+            ],
+            "description": "Client for API Content-Watch",
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -6580,6 +6623,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "soe-smile/content-watch": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

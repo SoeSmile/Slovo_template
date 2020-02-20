@@ -1,0 +1,35 @@
+{
+    "name": "soe-smile/content-watch",
+    "description": "Client for API Content-Watch",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleg",
+            "email": "soe190715@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "SoeSmile\\ContentWatch\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "SoeSmile\\ContentWatch\\Tests\\": "tests/"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SoeSmile\\ContentWatch\\ContentWatchServiceProvider"
+            ]
+        }
+    }
+}
