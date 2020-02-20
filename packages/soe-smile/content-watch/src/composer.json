@@ -1,0 +1,12 @@
+{
+  "name": "soe-smile/src",
+  "license": "MIT",
+  "description": "API for Content Watch",
+  "authors": [
+    {
+      "name": "Oleg",
+      "email": "soe190715@gmail.com"
+    }
+  ],
+  "require": {}
+}
