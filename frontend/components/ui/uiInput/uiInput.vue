@@ -1,17 +1,25 @@
 <template>
-    <div class="sm-block">
+    <div class="sm-flex col middle center">
 
-        <input class="fnt-light sm-p-2"
-               :class="classes[view] ? classes[view] : classes.blue"
-               :type="type"
-               :value="value"
-               :autocomplete="inputAutocomplete"
-               :placeholder="placeholder"
-               @keyup.enter="onSubmit"
-               @input="updateIt($event.target.value)"
-               :disabled="disabled">
+        <label class="sm-w-100">
+            <div v-if="label"
+                 class="sm-flex middle left sm-mb-1"
+                 :class="classLabel[view] ? classLabel[view] : classLabel.blue">
+                {{ label }}
+            </div>
 
-        <div class="sm-input-error">
+            <input class="fnt-light sm-p-2"
+                   :class="classes[view] ? classes[view] : classes.blue"
+                   :type="type"
+                   :value="value"
+                   :autocomplete="inputAutocomplete"
+                   :placeholder="placeholder"
+                   @keyup.enter="onSubmit"
+                   @input="updateIt($event.target.value)"
+                   :disabled="disabled">
+        </label>
+
+        <div class="sm-input-error" v-if="errors">
             <div class="animated fadeIn" v-if="viewErrors">
                 <div v-for="(val,key) in errors" :key="key">
                     {{ val }}
@@ -70,19 +78,32 @@
             disabled    : {
                 type   : Boolean,
                 default: false
+            },
+            label       : {
+                type   : String,
+                default: ''
             }
         },
 
         data() {
             return {
-                classes: {
+                classes   : {
                     white : 'sm-input white',
-                    blue  : 'sm-input blue',
-                    red   : 'sm-input red',
-                    orange: 'sm-input orange',
-                    teal  : 'sm-input teal',
-                    grey  : 'sm-input grey',
-                    dark  : 'sm-input dark'
+                    blue  : 'sm-input blue-l',
+                    red   : 'sm-input red-l',
+                    orange: 'sm-input orange-l',
+                    teal  : 'sm-input teal-l',
+                    grey  : 'sm-input grey-l',
+                    dark  : 'sm-input dark-l'
+                },
+                classLabel: {
+                    white : 'sm-color-dark',
+                    blue  : 'sm-color-blue',
+                    red   : 'sm-color-red',
+                    orange: 'sm-color-orange',
+                    teal  : 'sm-color-teal',
+                    grey  : 'sm-color-grey',
+                    dark  : 'sm-color-dark'
                 }
             }
         },

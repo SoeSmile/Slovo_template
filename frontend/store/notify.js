@@ -44,6 +44,7 @@ export const mutations = {
             );
         }
     },
+
     /**
      *
      * @param state
@@ -78,6 +79,7 @@ export const actions = {
             dispatch('closeNotify');
         }, state.data.time);
     },
+
     /**
      * @param commit
      */

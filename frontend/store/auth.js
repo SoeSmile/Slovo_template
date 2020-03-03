@@ -3,7 +3,8 @@ export const state = () => (
         token    : null,
         expiresIn: null,
         user     : {},
-        errors   : {}
+        errors   : {},
+        link     : '/'
     }
 );
 
@@ -29,6 +30,7 @@ export const mutations = {
      */
     SET_USER(state, data = {}) {
         state.user = data.user;
+        state.link = data.user.role.type;
     },
     /**
      * set errors
@@ -55,7 +57,8 @@ export const mutations = {
 export const getters = {
     user    : s => s.user,
     errors  : s => s.errors,
-    hasToken: s => !!s.token
+    hasToken: s => !!s.token,
+    link    : s => s.link,
 };
 
 export const actions = {
@@ -72,20 +75,13 @@ export const actions = {
             commit('SET_USER', response.data);
             commit('SET_TOKEN', response.data);
 
-            return this.$router.push('client')
+            return this.$router.push(response.data.user.role.type);
         }
         catch (e) {
             commit('SET_ERRORS', e.response.data.errors);
         }
     },
-    /**
-     * set errors
-     * @param commit
-     * @param errors
-     */
-    setErrors({commit}, errors = {}) {
-        commit('SET_ERRORS', errors)
-    },
+
     /**
      * logout
      * @param commit
@@ -93,7 +89,7 @@ export const actions = {
      */
     async logout({commit}) {
         try {
-            await this.$axios.post('api/logout');
+            await this.$axios.post('../api/logout');
             commit('CLEAR_TOKEN');
 
             return this.$router.push('/')
@@ -102,6 +98,7 @@ export const actions = {
             return this.$router.push('/')
         }
     },
+
     /**
      * clear User
      * @param commit

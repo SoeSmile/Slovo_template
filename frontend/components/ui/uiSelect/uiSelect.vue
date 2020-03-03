@@ -1,20 +1,28 @@
 <template>
-    <div class="sm-block">
+    <div class="sm-flex col middle center">
 
-        <div class="sm-select">
-            <select :class="classes[view] ? classes[view] : ''"
-                    :disabled="disabled"
-                    :value="value"
-                    @input="updateIt($event.target.value)">
-                <option v-for="(val,key) in  items"
-                        :key="key + randStr + val.name"
-                        :value="val.id"
-                        :selected="val.id == value">
-                    {{ val.name }}
-                </option>
-            </select>
-            <div class="arrow"></div>
-        </div>
+        <label class="sm-w-100">
+            <div v-if="label"
+                 class="sm-flex middle left sm-mb-1"
+                 :class="classLabel[view] ? classLabel[view] : classLabel.blue">
+                {{ label }}
+            </div>
+
+            <div class="sm-select">
+                <select :class="classes[view] ? classes[view] : ''"
+                        :disabled="disabled"
+                        :value="value"
+                        @input="updateIt($event.target.value)">
+                    <option v-for="(val,key) in  items"
+                            :key="key + randStr + val.name"
+                            :value="val[valName]"
+                            :selected="val.id == value">
+                        {{ val.name }}
+                    </option>
+                </select>
+                <div class="arrow"></div>
+            </div>
+        </label>
 
         <div class="sm-input-error">
             <div class="animated fadeIn" v-if="viewErrors">
@@ -46,11 +54,15 @@
             },
             view    : {
                 type   : String,
-                default: 'grey1'
+                default: 'grey'
             },
             items   : {
                 type   : Array,
                 default: () => []
+            },
+            valName : {
+                type   : String,
+                default: 'id'
             },
             disabled: {
                 type   : Boolean,
@@ -63,20 +75,32 @@
                 type   : Function,
                 default: () => {
                 }
+            },
+            label   : {
+                type   : String,
+                default: ''
             }
         },
 
         data() {
             return {
-                classes: {
+                classes   : {
                     white : 'border white',
-                    blue  : 'border blue',
-                    red   : 'border red',
-                    orange: 'border orange',
-                    teal  : 'border teal',
-                    grey  : 'border grey',
+                    blue  : 'border blue-l',
+                    red   : 'border red-l',
+                    orange: 'border orange-l',
+                    teal  : 'border teal-l',
+                    grey  : 'border grey-l',
                     dark  : 'border dark',
-                    grey1 : 'border grey-1'
+                },
+                classLabel: {
+                    white : 'sm-color-dark',
+                    blue  : 'sm-color-blue',
+                    red   : 'sm-color-red',
+                    orange: 'sm-color-orange',
+                    teal  : 'sm-color-teal',
+                    grey  : 'sm-color-grey',
+                    dark  : 'sm-color-dark'
                 }
             }
         },

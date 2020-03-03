@@ -1,25 +1,29 @@
 <template>
-    <div class="sm-flex middle sm-bg-grey-2 sm-w-100">
+    <header class="sm-flex sm-bg-white cs-site-head sm-mb-4">
 
-        <i class="mdi mdi-menu fnt-size-3 sm-ml-3 sm-link sm-mobile-show"></i>
+        <nav class="cs-container center sm-nav sm-color-blue sm-p-3">
+            <div class="start">
+                <div class="item fnt-bold fnt-size-3">
+                    SlovoTop
+                </div>
+            </div>
 
-        <nav class="sm-flex middle right sm-w-100">
-            <ul class="sm-flex">
-                <li class="sm-p-3" v-if="hasToken">
-                    <i class="mdi mdi-face"></i>
-                    {{ user.login }}
-                </li>
-                <li class="sm-p-3" v-if="hasToken">
-                    <div class="cs-link-menu-head"
+            <div class="end">
+                <div class="item">
+                    <i class="mdi mdi-face sm-mr-1"></i>
+                    {{ user.name }}
+                </div>
+                <div class="item">
+                    <div class="cs-link"
                          @click="$store.dispatch('auth/logout')">
                         <i class="mdi mdi-logout"></i>
                         {{ trans.menu.exit }}
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </nav>
 
-    </div>
+    </header>
 </template>
 
 <script>

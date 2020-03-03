@@ -22,12 +22,17 @@ class UserResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'       => $this->id,
-            'login'    => $this->login,
-            'email'    => $this->email,
-            'timeZone' => $this->time_zone,
-            'role'     => new RoleResource($this->role),
-            'note'     => $this->note,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'email'         => $this->email,
+            'timeZone'      => $this->time_zone,
+            'role'          => new RoleResource($this->roles),
+            'note'          => $this->note,
+            'confirm'       => $this->confirm,
+            'isAdmin'       => $this->role === 'admin',
+            'isClient'      => $this->role === 'client',
+            'countProjects' => $this->projects_count,
+            'countTasks'    => 0,
         ];
     }
 }

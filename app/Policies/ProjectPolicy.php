@@ -17,6 +17,21 @@ class ProjectPolicy
 
 
     /**
+     * @param User $user
+     * @param $ability
+     * @return bool
+     */
+    public function before(User $user, $ability): ?bool
+    {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        return null;
+    }
+
+
+    /**
      * Determine whether the user can view any projects.
      *
      * @param User $user
@@ -37,7 +52,7 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project): bool
     {
-        return true;
+        return $user->id === $project->user_id;
     }
 
 
@@ -76,31 +91,5 @@ class ProjectPolicy
     public function delete(User $user, Project $project): bool
     {
         return $user->id === $project->user_id;
-    }
-
-
-    /**
-     * Determine whether the user can restore the project.
-     *
-     * @param User $user
-     * @param Project $project
-     * @return bool
-     */
-    public function restore(User $user, Project $project): bool
-    {
-        return $user->isAdmin();
-    }
-
-
-    /**
-     * Determine whether the user can permanently delete the project.
-     *
-     * @param User $user
-     * @param Project $project
-     * @return bool
-     */
-    public function forceDelete(User $user, Project $project): bool
-    {
-        return $user->isAdmin();
     }
 }

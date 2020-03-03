@@ -7,7 +7,6 @@ use App\Models\Project;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProjectRepository
@@ -31,31 +30,8 @@ final class ProjectRepository extends AbstractRepository
      */
     public function all(array $data = [])
     {
-        // Фильтр по пользователю
-        $this->filter('user_id', $data['user'] ?? auth()->id());
+        $this->getQuery()->with('user')->latest();
 
         return parent::all($data);
-    }
-
-
-    /**
-     * @param array $data
-     * @return Builder|Model
-     */
-    public function store(array $data)
-    {
-        $data['user_id'] = auth()->id();
-
-        return parent::store($data);
-    }
-
-
-    /**
-     * @param array $data
-     * @return mixed
-     */
-    public function delete(array $data)
-    {
-        return $this->query->whereIn('id', $data)->delete();
     }
 }

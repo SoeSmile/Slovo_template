@@ -1,27 +1,10 @@
 <template>
-    <div class="sm-block sm-w-100">
-        <div class="sm-flex wrap sm-w-100">
-            <div class="sm-col-4">
-                <div class="sm-bg-white sm-m-2 sm-p-2">
-                    Hello
-                </div>
-            </div>
-            <div class="sm-col-4">
-                <div class="sm-bg-white sm-m-2 sm-p-2">
-                    Hello
-                </div>
-            </div>
-            <div class="sm-col-4">
-                <div class="sm-bg-white sm-m-2 sm-p-2">
-                    Hello
-                </div>
-            </div>
-            <div class="sm-col-4">
-                <div class="sm-bg-white sm-m-2 sm-p-2">
-                    Hello
-                </div>
-            </div>
+    <div class="sm-flex col sm-w-100">
+
+        <div class="sm-bg-white">
+            ЗАКАЗЫ
         </div>
+
     </div>
 </template>
 
@@ -33,17 +16,9 @@
 
         head() {
             return {
-                title: this.trans.menu.home
+                title: this.trans.menu_client.new_order
             }
         },
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        props: {},
 
         data() {
             return {}

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Project;
 
+use App\Models\Project;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -18,7 +19,7 @@ class ProjectDeleteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->user()->can('delete', Project::find($this->route('project')));
     }
 
 
@@ -29,8 +30,6 @@ class ProjectDeleteRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'ids' => 'required|array'
-        ];
+        return [];
     }
 }

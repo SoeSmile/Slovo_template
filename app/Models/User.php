@@ -6,7 +6,7 @@ namespace App\Models;
 use App\Models\Traits\UuidIdTrait;
 use Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -77,18 +77,18 @@ class User extends Authenticatable implements JWTSubject
     /**
      * @return BelongsTo
      */
-    public function role(): BelongsTo
+    public function roles(): BelongsTo
     {
-        return $this->belongsTo(Role::class, 'role_type', 'type');
+        return $this->belongsTo(Role::class, 'role', 'type');
     }
 
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function project(): HasOne
+    public function projects(): HasMany
     {
-        return $this->hasOne(Project::class);
+        return $this->hasMany(Project::class);
     }
 
 
@@ -97,7 +97,7 @@ class User extends Authenticatable implements JWTSubject
      */
     public function isAdmin(): bool
     {
-        return $this->note === 'admin';
+        return $this->role === 'admin';
     }
 
 

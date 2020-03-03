@@ -1,38 +1,33 @@
 <template>
-    <div class="sm-flex sm-vh-100 sm-bg-grey-1">
+    <div class="sm-flex col sm-vh-100">
         <ui-notify/>
+        <client-head/>
 
-        <client-main-menu/>
+        <div class="cs-container center sm-flex wide sm-vh-100">
 
-        <div class="sm-flex col sm-w-100">
+            <client-main-menu/>
 
-            <client-head/>
-
-            <div class="sm-flex cs-content sm-p-3">
+            <div class="sm-flex sm-w-100">
                 <nuxt/>
             </div>
 
-            <client-footer/>
         </div>
-
     </div>
 </template>
 
 <script>
     import clientMainMenu from "../components/client/menu/clientMainMenu";
     import clientHead from "../components/client/head/clientHead";
-    import clientFooter from "../components/client/footer/clientFooter";
 
 
     export default {
         name: "client",
 
-        middleware: ['auth'],
+        middleware: ['auth', 'authClient'],
 
         components: {
             clientMainMenu,
             clientHead,
-            clientFooter
         },
 
         created() {

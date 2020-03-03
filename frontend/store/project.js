@@ -1,3 +1,6 @@
+import queryBuilder from "./utils/queryBuilder";
+
+
 export const state = () => (
     {
         projects: {},
@@ -18,6 +21,7 @@ export const mutations = {
     SET_PROJECTS(state, data = {}) {
         state.projects = data.data;
     },
+
     /**
      * set paginate
      *
@@ -28,6 +32,7 @@ export const mutations = {
     SET_PAGINATE(state, data = {}) {
         state.paginate = data.meta || {};
     },
+
     /**
      * set query
      *
@@ -36,29 +41,11 @@ export const mutations = {
      * @constructor
      */
     SET_QUERY(state, data) {
-        // если обект дополнить изменить запрос
-        if (data instanceof Object) {
-            for (let i in data) {
-                state.query[i] = data[i];
-            }
-        }
-        // сброс запроса
-        if (data === 'reset') {
-            state.query = {count: 20}
-        }
+        state.query = queryBuilder(state.query, data);
     },
+
     /**
-     * push new project
-     *
-     * @param state
-     * @param data
-     * @constructor
-     */
-    STORE_PROJECT(state, data) {
-        state.projects.push(data);
-    },
-    /**
-     * ser errors
+     * set errors
      *
      * @param state
      * @param errors
@@ -98,19 +85,19 @@ export const actions = {
             dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
         }
     },
+
     /**
      * store new project
      *
-     * @param commit
      * @param dispatch
      * @param rootState
      * @param data
      * @return {Promise<void>}
      */
-    async storeProject({commit, dispatch, rootState}, data) {
+    async storeProject({dispatch, rootState}, data) {
         try {
             const response = await this.$axios.post('../api/projects', data);
-            commit('STORE_PROJECT', response.data);
+            dispatch('getProjects');
 
             dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
         }
@@ -119,6 +106,7 @@ export const actions = {
             dispatch('notify/showNotify', {message: e.response.data.errors, view: 'red', time: 5000}, {root: true})
         }
     },
+
     /**
      * update project
      *
@@ -138,25 +126,7 @@ export const actions = {
             dispatch('notify/showNotify', {message: e.response.data.errors, view: 'red', time: 5000}, {root: true})
         }
     },
-    /**
-     * delete projects
-     *
-     * @param dispatch
-     * @param rootState
-     * @param data
-     * @return {Promise<void>}
-     */
-    async deleteProject({dispatch, rootState}, data) {
-        try {
-            await this.$axios.post('../api/projects/delete', {ids: data});
-            dispatch('getProjects');
 
-            dispatch('notify/showNotify', {message: rootState.trans.all.success}, {root: true})
-        }
-        catch (e) {
-            dispatch('notify/showNotify', {message: e.response.data.message, view: 'red', time: 5000}, {root: true})
-        }
-    },
     /**
      * set errors
      *

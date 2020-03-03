@@ -1,5 +1,5 @@
 <template>
-    <div class="sm-flex middle right sm-w-100 sm-bg-grey">
+    <div class="sm-flex middle right sm-w-100 sm-bg-smoke">
         <div class="sm-p-1">
             SlovoTop &copy;
         </div>

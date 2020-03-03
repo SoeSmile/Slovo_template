@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import uiInput from "../components/ui/uiInput";
+import uiTextAria from "../components/ui/uiTextAria/uiTextAria";
 import uiAlert from "../components/ui/uiAlert";
 import uiPagination from "../components/ui/uiPagination";
 import uiModal from "../components/ui/uiModal";
@@ -12,6 +13,7 @@ import uiNotify from "../components/ui/uiNotify";
 
 const components = {
     uiInput,
+    uiTextAria,
     uiAlert,
     uiPagination,
     uiModal,

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\User\UserResource;
+use App\Models\User;
+use App\Repository\JournalRepository;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -14,12 +16,32 @@ use Illuminate\Http\JsonResponse;
 class ApiAuthController
 {
     /**
+     * @var JournalRepository
+     */
+    private JournalRepository $journal;
+
+
+    /**
+     * ApiAuthController constructor.
+     * @param JournalRepository $journalRepository
+     */
+    public function __construct(JournalRepository $journalRepository)
+    {
+        $this->journal = $journalRepository;
+    }
+
+
+    /**
      * @param LoginRequest $request
      * @return JsonResponse
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        if (!$token = auth()->attempt($request->all())) {
+        if (!$token = auth()->attempt([
+            'email'    => $request->email,
+            'password' => $request->password,
+            'confirm'  => true
+        ])) {
             return response()->json([
                 'errors' =>
                     [
@@ -67,10 +89,28 @@ class ApiAuthController
      */
     private function respondWithToken($token): JsonResponse
     {
+        $this->storeJournalUpdateTz();
+
         return response()->json([
             'token'     => $token,
             'expiresIn' => auth()->factory()->getTTL() * 60,
             'user'      => new UserResource(auth()->user()),
         ]);
+    }
+
+
+    /**
+     * @return void
+     */
+    private function storeJournalUpdateTz(): void
+    {
+        $this->journal->store([
+            'user_id' => auth()->id(),
+            'event'   => 'userLogin'
+        ]);
+
+        if (request()->has('timeZone')) {
+            auth()->user()->update(['time_zone' => request()->timeZone]);
+        }
     }
 }

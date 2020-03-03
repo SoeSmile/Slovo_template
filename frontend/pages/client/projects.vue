@@ -1,72 +1,75 @@
 <template>
-    <div class="sm-flex wrap wrap-start top sm-w-100">
+    <div class="sm-flex col sm-w-100">
 
-        <div class="sm-nav sm-bg-blue sm-color-white sm-mb-2">
-            <div class="start">
-                <div class="item link"
-                     @click="$store.dispatch('project/getProjects', 'reset')">
-                    <i class="mdi mdi-sync sm-mr-1"></i>
+        <div class="sm-bg-white sm-p-4 sm-mb-4">
+            <div class="sm-nav sm-bg-teal-l sm-color-teal">
+                <div class="start">
+                    <div class="item link"
+                         @click="getProjects('reset')">
+                        <i class="mdi mdi-sync sm-mr-1"></i>
+                    </div>
+                    <div class="item link"
+                         @click="project.show = true">
+                        <i class="mdi mdi-plus-circle sm-mr-1"></i>
+                        {{ trans.all.add }}
+                    </div>
                 </div>
-                <div class="item link"
-                     @click="project.show = true">
-                    <i class="mdi mdi-plus-circle sm-mr-1"></i>
-                    {{ trans.all.add }}
-                </div>
-                <div class="item link"
-                     @click="edit">
-                    <i class="mdi mdi-pencil sm-mr-1"></i>
-                    {{ trans.all.edit }}
-                </div>
-                <div class="item link"
-                     @click="destroy">
-                    <i class="mdi mdi-trash-can sm-mr-1"></i>
-                    {{ trans.all.delete }}
-                </div>
-            </div>
-            <div class="end">
-                <div class="item">
-                    <i class="mdi mdi-folder-search-outline fnt-size-3 sm-mr-2"></i>
-                    <ui-input view="white"/>
+                <div class="end">
+                    <div class="item">
+                        <i class="mdi mdi-folder-search-outline fnt-size-3 sm-mr-2"></i>
+                        <ui-input view="teal"/>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="sm-flex col sm-p-3 sm-bg-white sm-w-100">
-            <table class="sm-table">
-                <thead>
-                <tr>
-                    <th class="sm-w-2"></th>
-                    <th class="sm-w-40">
-                        {{ this.trans.project.name }}
-                    </th>
-                    <th class="sm-w-40">
-                        {{ this.trans.project.url }}
-                    </th>
-                    <th>{{ this.trans.all.additional }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="hover click"
-                    v-for="(val,key) in projects"
-                    :key="key"
-                    @click="select(val.id)"
-                    :class="{'use' : selected.includes(val.id)}">
-                    <td>
-                        <ui-checkbox view="blue"
-                                     :native-value="val.id"
-                                     v-model="selected"/>
-                    </td>
-                    <td class="left">{{ val.name }}</td>
-                    <td>{{ val.url }}</td>
-                    <td>{{ val.data }}</td>
-                </tr>
-                </tbody>
-                <tfoot></tfoot>
-            </table>
+        <div class="sm-bg-white sm-p-5">
+            <div class="sm-flex col sm-bg-white sm-w-100 sm-mt-5">
+                <table class="sm-table">
+                    <thead>
+                    <tr>
+                        <th class="sm-w-10"></th>
+                        <th class="sm-w-40">
+                            {{ this.trans.project.name }}
+                        </th>
+                        <th class="sm-w-40">
+                            {{ this.trans.project.url }}
+                        </th>
+                        <th>{{ this.trans.all.additional }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="hover click"
+                        v-for="(val,key) in projects"
+                        :key="key"
+                        :class="{'use' : selected.includes(val.id)}">
+                        <td>
+                            <div class="sm-flex middle">
+                                <ui-checkbox view="teal"
+                                             :native-value="val.id"
+                                             v-model="selected"/>
+                                <i :title="trans.all.edit"
+                                   class="mdi mdi-pencil sm-color-blue sm-mr-1 sm-link fnt-size-2"
+                                   @click="edit(key)">
+                                </i>
+                                <i :title="trans.all.delete"
+                                   class="mdi mdi-delete sm-color-red sm-mr-1 sm-link fnt-size-2"
+                                   @click="destroy(key)">
+                                </i>
+                            </div>
+                        </td>
+                        <td class="left">{{ val.name }}</td>
+                        <td>{{ val.url }}</td>
+                        <td>{{ val.data }}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
 
-            <ui-pagination :pagination="paginate"
-                           :count-show="10"
-                           store="project/getProjects"/>
+                <ui-pagination :pagination="paginate"
+                               :count-show="10"
+                               store="project/getProjects"/>
+            </div>
         </div>
 
         <client-project-view :project="project"/>
@@ -93,13 +96,8 @@
         },
 
         created() {
-            this.$store.dispatch('project/getProjects');
+            this.getProjects('reset');
         },
-
-        mounted() {
-        },
-
-        props: {},
 
         data() {
             return {
@@ -135,6 +133,15 @@
 
         methods: {
             /**
+             * get projects
+             *
+             * @param request
+             */
+            getProjects(request = null) {
+                this.$store.dispatch('project/getProjects', request);
+            },
+
+            /**
              * add/remove from select
              *
              * @param id
@@ -146,39 +153,46 @@
                     this.selected.push(id);
                 }
             },
+
             /**
              * edit project
              *
              * @param key
              */
             edit(key) {
-                if (this.selected.length > 0) {
-
-                    const item = this.projects.find((el) => {
-                        return el.id === this.selected[this.selected.length - 1];
-                    });
-
-                    this.project.data = {...item};
-                    this.project.show = true;
-                }
+                this.project.data = {...this.projects[key]};
+                this.project.show = true;
             },
+
             /**
-             * destroy projects
+             * destroy project
+             *
+             * @param key
              */
-            destroy() {
-                if (this.selected.length > 0) {
-                    this.$dialog.show(
-                        {
-                            head    : this.trans.all.delete,
-                            view    : 'red',
-                            message : this.trans.warning.sure_delete,
-                            yes     : this.trans.all.yes,
-                            no      : this.trans.all.no,
-                            onSubmit: () => {
-                                this.$store.dispatch('project/deleteProject', this.selected);
-                            }
-                        });
-                }
+            destroy(key) {
+                this.$dialog.show(
+                    {
+                        head    : this.trans.all.delete,
+                        view    : 'red',
+                        message : this.trans.warning.sure_delete,
+                        yes     : this.trans.all.yes,
+                        no      : this.trans.all.no,
+                        onSubmit: () => {
+                            this.$axios.delete('../api/projects/' + this.projects[key].id)
+                                .then(response => {
+                                    this.$store.dispatch('notify/showNotify', {
+                                        message: this.trans.all.success
+                                    });
+                                    this.getProjects();
+                                })
+                                .catch(e => {
+                                    this.$store.dispatch('notify/showNotify', {
+                                        view   : 'red',
+                                        message: e.response.data.errors
+                                    });
+                                })
+                        }
+                    });
             }
         }
     }

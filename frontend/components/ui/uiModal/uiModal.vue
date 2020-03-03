@@ -1,6 +1,7 @@
 <template>
     <section v-if="show">
-        <div class="sm-modal wpx-400 sm-bg-white animated fadeIn">
+        <div class="sm-modal sm-bg-white animated fadeIn"
+             :class="'wpx-'+wpx">
             <div class="head"
                  :class="classes[view]">
                 <div class="text">
@@ -13,7 +14,7 @@
             <div class="content">
                 <slot name="content"></slot>
             </div>
-            <div class="foot">
+            <div class="foot sm-left">
                 <slot name="foot"></slot>
             </div>
         </div>
@@ -45,6 +46,10 @@
             view   : {
                 type   : String,
                 default: 'teal'
+            },
+            wpx    : {
+                type   : Number,
+                default: 400
             }
         },
 
@@ -52,7 +57,7 @@
             return {
                 classes: {
                     white : 'sm-bg-white sm-color-dark',
-                    blue  : 'sm-bg-blue sm-color-white',
+                    blue  : 'sm-bg-blue-l sm-color-blue',
                     red   : 'sm-bg-red sm-color-white',
                     orange: 'sm-bg-orange sm-color-white',
                     teal  : 'sm-bg-teal sm-color-white',

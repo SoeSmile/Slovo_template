@@ -19,7 +19,7 @@
                      @click="submit">
                     {{ yes }}
                 </div>
-                <div class="sm-button sm-bg-grey sm-color-white"
+                <div class="sm-button sm-bg-grey-l sm-color-grey"
                      @click="close">
                     {{ no }}
                 </div>
@@ -78,12 +78,12 @@
 
                 classes: {
                     white : 'sm-bg-white sm-color-dark',
-                    blue  : 'sm-bg-blue sm-color-white',
-                    red   : 'sm-bg-red sm-color-white',
-                    orange: 'sm-bg-orange sm-color-white',
-                    teal  : 'sm-bg-teal sm-color-white',
-                    grey  : 'sm-bg-grey sm-color-white',
-                    dark  : 'sm-bg-dark sm-color-white'
+                    blue  : 'sm-bg-blue-l sm-color-blue',
+                    red   : 'sm-bg-red-l sm-color-red',
+                    orange: 'sm-bg-orange-l sm-color-orange',
+                    teal  : 'sm-bg-teal-l sm-color-teal',
+                    grey  : 'sm-bg-grey-l sm-color-grey',
+                    dark  : 'sm-bg-dark-l sm-color-dark'
                 }
             }
         },

@@ -26,8 +26,7 @@
         <ui-select :items="showList"
                    v-model="count"
                    @onSelect="changePage"
-                   class="sm-mt-1"
-                   view="grey1"/>
+                   class="sm-mt-1"/>
     </div>
 </template>
 

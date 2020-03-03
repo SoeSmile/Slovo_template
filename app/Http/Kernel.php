@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http;
 
@@ -40,7 +41,6 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\AuthCommon::class
         ],
     ];
 
@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'signed'           => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'basic-auth'       => \App\Http\Middleware\BasicAuth::class,
     ];
 
     /**

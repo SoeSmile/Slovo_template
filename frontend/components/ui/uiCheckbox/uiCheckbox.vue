@@ -3,7 +3,7 @@
         <input :id="id"
                type="checkbox"
                v-model="computedValue"
-               @click.stop.prevent
+               @click.stop
                :disabled="disabled"
                :value="nativeValue"
                :true-value="trueValue"
@@ -35,16 +35,22 @@
             },
             view       : {
                 type   : String,
-                default: 'teal'
+                default: 'blue'
             },
             disabled   : {
                 type   : Boolean,
                 default: false
             },
-            nativeValue: true,
+            nativeValue: {
+                default: true
+            },
             value      : true,
-            trueValue  : true,
-            falseValue : false,
+            trueValue  : {
+                default: true
+            },
+            falseValue : {
+                default: false
+            },
         },
 
         data() {
