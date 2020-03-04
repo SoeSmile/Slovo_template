@@ -38,8 +38,6 @@ services:
     build: ./docker/pg
     container_name: slovo-pg
     restart: on-failure
-    ports:
-      - 32772:5432
     environment:
       POSTGRES_PASSWORD: 123456
   node:

@@ -11,12 +11,12 @@
 
     & tr {
       & th {
-        font-family: $fontBold;
+        font-family: $fontRegular;
         padding: map_get($sizes, 2);
-        border-bottom: 2px solid map_get($colors, 'grey-3');
+        border-bottom: 2px solid map_get($colors, 'light');
         text-align: center;
         color: map_get($colors, 'dark');
-        background-color: map_get($colors, 'grey-1');
+        background-color: map_get($colors, 'fon');
 
         &.left {
           text-align: left;
@@ -40,7 +40,7 @@
 
       &.hover {
         &:hover {
-          background-color: map_get($colors, 'grey-5');
+          background-color: map_get($colors, 'smoke');
           @include animateHover;
         }
       }
@@ -54,10 +54,11 @@
       }
 
       & td {
-        border-bottom: 1px solid map_get($colors, 'grey-3');
+        border-bottom: 1px solid map_get($colors, 'light');
         padding: map_get($sizes, 1);
         text-align: center;
         color: map_get($colors, 'dark');
+        word-break: break-all;
 
         &.left {
           text-align: left;

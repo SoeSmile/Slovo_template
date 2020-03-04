@@ -1,0 +1,18 @@
+// col
+$col: 12;
+$wight: 100%;
+$colum: $wight/$col;
+
+@for $i from 1 through $col {
+  .#{$prefix}col-#{$i} {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: $colum*$i;
+    max-width: $colum*$i;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+  }
+}

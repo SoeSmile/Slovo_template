@@ -1,6 +1,7 @@
 .#{$prefix}select {
   position: relative;
   display: inline-flex;
+  width: 100%;
 
   & select {
     display: inline-flex;
@@ -10,8 +11,9 @@
     appearance: none;
     border: 0;
     padding: map_get($sizes, 2) map_get($sizes, 5) map_get($sizes, 2) map_get($sizes, 2);
-    background: map_get($colors,'grey-1');
+    background: map_get($colors,'white');
     color: map_get($colors, 'dark');
+    width: inherit;
 
     &::-ms-expand {
       display: none

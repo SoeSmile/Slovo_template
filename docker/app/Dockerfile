@@ -1,4 +1,4 @@
-FROM php:7.4.2-fpm
+FROM php:7.4.3-fpm
 
 # Install PHP extensions and PECL modules.
 RUN buildDeps=" \
@@ -28,6 +28,7 @@ RUN buildDeps=" \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-install ldap \
     && docker-php-ext-install exif \
+    && docker-php-ext-install pcntl \
     && pecl install redis \
     && docker-php-ext-enable redis.so \
     && apt-get purge -y --auto-remove $buildDeps \
@@ -35,5 +36,5 @@ RUN buildDeps=" \
     && docker-php-ext-enable xdebug \
     && curl -fsSL https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
-    && composer global require phpunit/phpunit ^7.0 --no-progress --no-scripts --no-interaction \
+    && composer global require phpunit/phpunit ^8.0 --no-progress --no-scripts --no-interaction \
 && rm -r /var/lib/apt/lists/*

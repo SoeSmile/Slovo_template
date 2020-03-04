@@ -12,6 +12,7 @@
   min-height: 100vh;
   height: 100%;
   position: relative;
+  background: map_get($colors,'fon');
 }
 
 .page-enter-active, .page-leave-active {

@@ -24,9 +24,10 @@ export default {
     ],
 
     plugins: [
-        '~/plugins/ui.js',
-        '~/plugins/trans.js',
-        '~/plugins/mixin.js',
+        '~/plugins/ui',
+        '~/plugins/trans',
+        '~/plugins/mixin',
+        '~/plugins/auth',
         '~/plugins/axios'
     ],
 
@@ -36,10 +37,9 @@ export default {
     ],
 
     axios: {
-        baseURL: "./",
+        baseURL: "/",
         headers: {
-            'Accept'  : 'application/json',
-            'X-common': 'c23050c2-45e5-41d3-8b84-e23d6e533ea8'
+            'Accept'  : 'application/json'
         }
     },
 

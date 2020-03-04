@@ -3,6 +3,10 @@
   display: flex;
   flex: 0 1 auto;
 
+  &.inline {
+    display: inline-flex;
+  }
+
   &.middle {
     align-items: center;
   }

@@ -4,6 +4,7 @@
   overflow: auto;
   max-height: 95%;
   top: 20%;
+  border-radius: 0.25rem;
   @include blockShadow;
 
   // Width in px
@@ -26,7 +27,7 @@
   }
 
   & .head {
-    padding: map_get($sizes, 3);
+    padding: map_get($sizes, 2) map_get($sizes, 5);
     font-family: $fontBold;
     position: relative;
     display: flex;

@@ -1,5 +1,6 @@
-.cs-link-menu-head {
+.cs-link {
   cursor: pointer;
+  color: map-get($colors, 'magenta') !important;
 
   &:hover {
     color: map-get($colors, 'orange') !important;

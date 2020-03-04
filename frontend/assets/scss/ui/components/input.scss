@@ -1,22 +1,18 @@
 .#{$prefix}input {
   border: 1px solid;
-  background: map_get($colors, 'grey-1');
+  background: map_get($colors, 'white');
   width: 100%;
   box-sizing: border-box;
-
-  @include bd_color();
-
-  &:focus {
-    background: map_get($colors, 'white');
-    @include animateHover;
-  }
+  resize: none;
 }
+@include bd_color();
 
 .#{$prefix}input-error {
   font-size: 0.7rem;
   margin-top: 0.3rem;
   color: map_get($colors, 'red');
-  text-align: center;
+  text-align: left;
+  width: 100%;
 }
 
 
