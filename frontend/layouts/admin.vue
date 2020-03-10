@@ -1,6 +1,5 @@
 <template>
     <div class="sm-flex col sm-vh-100">
-        <ui-notify/>
         <admin-head/>
 
         <div class="cs-container center sm-flex wide sm-vh-100">
@@ -29,23 +28,5 @@
         },
 
         middleware: ['auth', 'authAdmin'],
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        props: {},
-
-        data() {
-            return {}
-        },
-
-        computed: {},
-
-        watch: {},
-
-        methods: {}
     }
 </script>

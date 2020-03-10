@@ -7,6 +7,10 @@ use App\Http\Resources\User\UserMiniResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Class ProjectResource
+ * @package App\Http\Resources\Project
+ */
 class ProjectResource extends JsonResource
 {
     /**

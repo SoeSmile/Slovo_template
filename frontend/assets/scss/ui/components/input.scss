@@ -20,3 +20,12 @@
   box-shadow: none;
 }
 
+.#{$prefix}input-clear{
+  position: absolute;
+  cursor: pointer;
+  right: 5px;
+
+  &:hover{
+    opacity: 0.6;
+  }
+}

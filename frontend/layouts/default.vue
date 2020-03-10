@@ -11,23 +11,5 @@
 
     export default {
         name: "default",
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        props: {},
-
-        data() {
-            return {}
-        },
-
-        computed: {},
-
-        watch: {},
-
-        methods: {}
     }
 </script>

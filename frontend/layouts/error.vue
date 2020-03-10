@@ -9,23 +9,5 @@
 <script>
     export default {
         name: "error",
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        props: {},
-
-        data() {
-            return {}
-        },
-
-        computed: {},
-
-        watch: {},
-
-        methods: {}
     }
 </script>

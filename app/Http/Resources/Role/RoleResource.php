@@ -20,10 +20,12 @@ class RoleResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $locale = app()->getLocale();
+
         return [
             'id'   => $this->id,
             'type' => $this->type,
-            'name' => trans('data.role.' . $this->type),
+            'name' => $this->$locale
         ];
     }
 }

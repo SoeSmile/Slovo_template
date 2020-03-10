@@ -4,7 +4,7 @@
         <div class="sm-bg-white sm-p-4 sm-mb-4">
             <div class="sm-nav sm-bg-teal-l sm-color-teal">
                 <div class="start">
-                    <div class="item link"
+                    <div class="item link sm-p-2"
                          @click="getProjects('reset')">
                         <i class="mdi mdi-sync sm-mr-1"></i>
                     </div>
@@ -12,12 +12,6 @@
                          @click="project.show = true">
                         <i class="mdi mdi-plus-circle sm-mr-1"></i>
                         {{ trans.all.add }}
-                    </div>
-                </div>
-                <div class="end">
-                    <div class="item">
-                        <i class="mdi mdi-folder-search-outline fnt-size-3 sm-mr-2"></i>
-                        <ui-input view="teal"/>
                     </div>
                 </div>
             </div>
@@ -67,12 +61,12 @@
                 </table>
 
                 <ui-pagination :pagination="paginate"
-                               :count-show="10"
-                               store="project/getProjects"/>
+                               :count-show="query.count"
+                               :event="getProjects"/>
             </div>
         </div>
 
-        <client-project-view :project="project"/>
+        <client-project-view :project="project" @close="getProjects"/>
     </div>
 </template>
 
@@ -95,54 +89,44 @@
             }
         },
 
-        created() {
-            this.getProjects('reset');
+        async asyncData({app}) {
+            const response = await app.$requestRun('get', 'api/projects', {count: 20});
+
+            return {
+                projects: response.data,
+                paginate: response.meta
+            }
         },
 
         data() {
             return {
-                project: {
+                project : {
                     show: false,
                     data: {}
                 },
-
+                projects: {},
+                paginate: {},
+                query   : {count: 20},
                 selected: [],
             }
         },
 
-        computed: {
-            /**
-             * projects
-             *
-             * @return {*}
-             */
-            projects() {
-                return this.$store.getters['project/projects'];
-            },
-            /**
-             * paginate
-             *
-             * @return {*}
-             */
-            paginate() {
-                return this.$store.getters['project/paginate'];
-            }
-        },
-
-        watch: {},
-
         methods: {
             /**
-             * get projects
+             * получить список проектов
              *
              * @param request
              */
-            getProjects(request = null) {
-                this.$store.dispatch('project/getProjects', request);
+            async getProjects(request = null) {
+                this.selected = [];
+
+                const response = await this.$requestRun('get', 'api/projects', this.$requestMake(this.query, request));
+                this.projects  = response.data;
+                this.paginate  = response.meta;
             },
 
             /**
-             * add/remove from select
+             * выбрать элемени и добавить/удалить в массив
              *
              * @param id
              */
@@ -178,18 +162,13 @@
                         yes     : this.trans.all.yes,
                         no      : this.trans.all.no,
                         onSubmit: () => {
-                            this.$axios.delete('../api/projects/' + this.projects[key].id)
+                            this.$axios.delete('api/projects/' + this.projects[key].id)
                                 .then(response => {
-                                    this.$store.dispatch('notify/showNotify', {
-                                        message: this.trans.all.success
-                                    });
+                                    this.$notify.show({message: this.trans.all.success});
                                     this.getProjects();
                                 })
                                 .catch(e => {
-                                    this.$store.dispatch('notify/showNotify', {
-                                        view   : 'red',
-                                        message: e.response.data.errors
-                                    });
+                                    this.$notify.show({message: e.response.data.errors, view: 'red'});
                                 })
                         }
                     });

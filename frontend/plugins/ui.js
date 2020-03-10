@@ -9,6 +9,9 @@ import uiSelect from "../components/ui/uiSelect";
 import uiCheckbox from "../components/ui/uiCheckbox";
 import uiDialog from "../components/ui/uiDialog";
 import uiNotify from "../components/ui/uiNotify";
+import uiHelp from "../components/ui/uiHelp/uiHelp";
+
+import uiDatePicker from 'vue2-datepicker';
 
 
 const components = {
@@ -20,11 +23,14 @@ const components = {
     uiSelect,
     uiCheckbox,
     uiDialog,
-    uiNotify
+    uiNotify,
+    uiHelp,
+    uiDatePicker
 };
 
 for (let name in components) {
     Vue.component(name, components[name]);
 }
 
+Vue.prototype.$notify = uiNotify;
 Vue.prototype.$dialog = uiDialog;

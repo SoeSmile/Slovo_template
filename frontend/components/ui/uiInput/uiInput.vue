@@ -8,15 +8,22 @@
                 {{ label }}
             </div>
 
-            <input class="fnt-light sm-p-2"
-                   :class="classes[view] ? classes[view] : classes.blue"
-                   :type="type"
-                   :value="value"
-                   :autocomplete="inputAutocomplete"
-                   :placeholder="placeholder"
-                   @keyup.enter="onSubmit"
-                   @input="updateIt($event.target.value)"
-                   :disabled="disabled">
+            <div class="sm-flex middle">
+                <input class="fnt-light sm-p-2"
+                       :class="classes[view] ? classes[view] : classes.blue"
+                       :type="type"
+                       :value="value"
+                       :autocomplete="inputAutocomplete"
+                       :placeholder="placeholder"
+                       @keyup.enter="onSubmit"
+                       @input="updateIt($event.target.value)"
+                       :disabled="disabled">
+
+                <i v-if="clear"
+                   class="mdi mdi-close sm-input-clear"
+                   @click="updateIt(null)"
+                   :class="classLabel[view] ? classLabel[view] : classLabel.blue"></i>
+            </div>
         </label>
 
         <div class="sm-input-error" v-if="errors">
@@ -82,6 +89,10 @@
             label       : {
                 type   : String,
                 default: ''
+            },
+            clear       : {
+                type   : Boolean,
+                default: false
             }
         },
 

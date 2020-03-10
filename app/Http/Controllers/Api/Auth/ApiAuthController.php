@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use App\Repository\Dto\JournalDto;
 use App\Repository\JournalRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -104,10 +105,10 @@ class ApiAuthController
      */
     private function storeJournalUpdateTz(): void
     {
-        $this->journal->store([
+        $this->journal->store(new JournalDto([
             'user_id' => auth()->id(),
             'event'   => 'userLogin'
-        ]);
+        ]));
 
         if (request()->has('timeZone')) {
             auth()->user()->update(['time_zone' => request()->timeZone]);

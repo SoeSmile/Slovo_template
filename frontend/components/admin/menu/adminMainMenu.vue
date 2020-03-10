@@ -13,12 +13,12 @@
                 exact
                 active-class="cs-link-active"
                 class="sm-flex middle cs-link sm-pb-2"
-                :title="showMenu ? '' : lang(val.name)">
+                :title="showMenu ? '' : transFn(val.name)">
             <i :class="'mdi mdi-'+val.icon"
                class="sm-mr-3 fnt-size-3"></i>
 
             <div :class="showMenu ? 'sm-show' : 'sm-hide'">
-                {{ lang(val.name) }}
+                {{ transFn(val.name) }}
             </div>
         </n-link>
 
@@ -46,6 +46,8 @@
                     {name: 'role.roles', icon: 'account-box', link: '/admin/role', show: true},
                     {name: 'user.users', icon: 'account-multiple', link: '/admin/users', show: true},
                     {name: 'project.projects', icon: 'domain', link: '/admin/projects', show: true},
+                    {name: 'subject.subjects', icon: 'text-subject', link: '/admin/subjects', show: true},
+                    {name: 'events.events', icon: 'history', link: '/admin/events', show: true},
                 ]
             }
         },

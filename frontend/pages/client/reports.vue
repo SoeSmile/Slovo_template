@@ -14,7 +14,7 @@
 
         head() {
             return {
-                title: this.trans.menu_client.new_order
+                title: this.trans.order.new_order
             }
         },
 

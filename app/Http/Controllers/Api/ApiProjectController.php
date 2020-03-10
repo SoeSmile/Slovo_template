@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Project\ProjectDeleteRequest;
 use App\Http\Requests\Project\ProjectStoreRequest;
 use App\Http\Requests\Project\ProjectUpdateRequest;
+use App\Http\Resources\Project\ProjectMiniResource;
 use App\Http\Resources\Project\ProjectResource;
 use App\Models\Project;
 use App\Repository\Dto\ProjectDto;
@@ -42,6 +43,10 @@ class ApiProjectController
      */
     public function index(Request $request): AnonymousResourceCollection
     {
+        if ($request->has('mini')) {
+            return ProjectMiniResource::collection($this->project->all($request->all()));
+        }
+
         return ProjectResource::collection($this->project->all($request->all()));
     }
 

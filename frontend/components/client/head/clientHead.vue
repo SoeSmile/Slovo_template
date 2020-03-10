@@ -9,6 +9,10 @@
             </div>
 
             <div class="end">
+                <div class="item sm-color-orange">
+                    <i class="mdi mdi-wallet sm-mr-1"></i>
+                    {{ trans.user.balance }} : {{ user.balance || 0 }}
+                </div>
                 <div class="item">
                     <i class="mdi mdi-face sm-mr-1"></i>
                     {{ user.name }}

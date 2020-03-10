@@ -96,15 +96,8 @@
             }
         },
 
-        created() {
-            this.getUser();
-            this.$store.dispatch('role/getRoles', {count: 0});
-            this.$store.commit('user/SET_ERRORS');
-        },
-
-        data() {
-            return {
-                user: {
+        async asyncData({app, params}) {
+            let user  = {
                     name    : null,
                     email   : null,
                     password: null,
@@ -115,64 +108,47 @@
                     timeZone: -new Date().getTimezoneOffset() / 60,
                     note    : null
                 },
-                id  : this.$route.params.id,
+                roles = await app.$requestRun('get', 'api/roles', {count: 0});
+
+            if (params.id && params.id !== 'new') {
+                const getUser = await app.$requestRun('get', 'api/users/' + params.id);
+                user          = getUser.data;
+            }
+
+            return {
+                roles: roles.data,
+                user : user,
             }
         },
 
-        computed: {
-            /**
-             * errors
-             */
-            errors() {
-                return this.$store.getters['user/errors'];
-            },
-            /**
-             * projects
-             *
-             * @return {*}
-             */
-            roles() {
-                return this.$store.getters['role/roles'];
-            },
+        data() {
+            return {
+                user  : {},
+                id    : this.$route.params.id,
+                roles : {},
+                errors: {
+                    name    : null,
+                    email   : null,
+                    password: null
+                }
+            }
         },
 
         methods: {
-            /**
-             * get user
-             */
-            getUser() {
-                if (this.id && this.id !== 'new') {
-                    this.$axios.get('../api/users/' + this.id)
-                        .then(response => {
-                            this.user = response.data.data;
-                        })
-                        .catch(e => {
-                            this.$store.dispatch('notify/showNotify', {
-                                message: e.response.data.message,
-                                view   : 'red',
-                                time   : 5000
-                            })
-                        })
-                }
-            },
-
             /**
              * validate data
              */
             validation() {
                 let result   = true,
-                    errors   = {},
                     required = ['name', 'email', 'password'];
 
                 for (let i in this.user) {
 
                     if (!this.user[i] && required.includes(i)) {
-                        result    = false;
-                        errors[i] = this.trans.warning.required_field;
+                        result         = false;
+                        this.errors[i] = this.trans.warning.required_field;
                     }
                 }
-
-                this.$store.commit('user/SET_ERRORS', errors);
 
                 return result;
             },
@@ -183,22 +159,31 @@
             saveUpdate() {
                 if (this.validation()) {
 
-                    let route  = '../api/users',
+                    let route  = 'api/users',
                         method = 'post';
 
                     if (this.user.id) {
-                        route  = '../api/users/' + this.user.id;
+                        route  = 'api/users/' + this.user.id;
                         method = 'put';
                     }
 
+                    this.errors = {
+                        name    : null,
+                        email   : null,
+                        password: null
+                    };
+
                     this.$axios[method](route, this.serializeData(this.user))
                         .then(response => {
-                            this.$store.dispatch('notify/showNotify', {message: this.trans.all.success, time: 5000});
-                            this.$router.push('/admin/users/' + response.data.data.id || this.user.id);
+                            this.$notify.show({message: this.trans.all.success});
+
+                            this.$router.push('/admin/users/' + (
+                                response.data.data ? response.data.data.id : this.user.id
+                            ));
                         })
                         .catch(e => {
-                            this.$store.commit('user/SET_ERRORS', e.response.data.errors);
-                        })
+                            this.errors = e.response.data.errors;
+                        });
                 }
             },
 

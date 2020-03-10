@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 if (!function_exists('camelKeys')) {
@@ -43,5 +44,38 @@ if (!function_exists('snakeKeys')) {
             $result[Str::snake($key, $delimiter)] = $value;
         }
         return $result;
+    }
+}
+
+if (!function_exists('isAdmin')) {
+
+    /**
+     * user is Admin
+     *
+     * @return bool
+     */
+    function isAdmin()
+    {
+        if (auth()->check()) {
+            return auth()->user()->isAdmin();
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('parseDateToTz')) {
+
+    /**
+     * user is Admin
+     *
+     * @param $date
+     * @return bool
+     */
+    function parseDateToTz($date)
+    {
+        $tz = auth()->check() ? auth()->user()->time_zone : null;
+
+        return Carbon::parse($date)->timezone($tz ?? 3)->format('H:i:s d-m-Y');
     }
 }

@@ -1,6 +1,6 @@
 .#{$prefix}modal {
   position: fixed;
-  z-index: 999;
+  z-index: $z-pop;
   overflow: auto;
   max-height: 95%;
   top: 20%;
@@ -80,5 +80,5 @@
   height: 100%;
   background-color: #000;
   opacity: 0.3;
-  z-index: 998;
+  z-index: $z-pop-bg;
 }

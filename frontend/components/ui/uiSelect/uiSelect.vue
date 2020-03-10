@@ -24,7 +24,7 @@
             </div>
         </label>
 
-        <div class="sm-input-error">
+        <div class="sm-input-error" v-if="errors">
             <div class="animated fadeIn" v-if="viewErrors">
                 <div v-for="(val,key) in errors" :key="key + randStr + val">
                     {{ val }}
@@ -50,7 +50,7 @@
 
         props: {
             value   : {
-                default: ''
+                default: null
             },
             view    : {
                 type   : String,
@@ -91,7 +91,7 @@
                     orange: 'border orange-l',
                     teal  : 'border teal-l',
                     grey  : 'border grey-l',
-                    dark  : 'border dark',
+                    dark  : 'border dark-l',
                 },
                 classLabel: {
                     white : 'sm-color-dark',

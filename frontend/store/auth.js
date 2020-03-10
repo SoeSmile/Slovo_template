@@ -89,7 +89,7 @@ export const actions = {
      */
     async logout({commit}) {
         try {
-            await this.$axios.post('../api/logout');
+            await this.$axios.post('api/logout');
             commit('CLEAR_TOKEN');
 
             return this.$router.push('/')

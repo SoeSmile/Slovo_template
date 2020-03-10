@@ -33,11 +33,18 @@ final class UserRepository extends AbstractRepository
     {
         $this->getQuery()->withCount('projects')->latest();
 
+        // если админ вывод последней даты входа
+        if (isAdmin()) {
+            $this->getQuery()->with('journalsLastLogin');
+        }
+
         return parent::all($data);
     }
 
 
     /**
+     * get user by ConfirmKey
+     *
      * @param string $key
      * @return Builder|Model|object|null
      */
@@ -48,6 +55,8 @@ final class UserRepository extends AbstractRepository
 
 
     /**
+     * approve users
+     *
      * @param array $ids
      * @return bool
      */

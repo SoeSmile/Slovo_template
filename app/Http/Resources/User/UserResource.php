@@ -31,8 +31,26 @@ class UserResource extends JsonResource
             'confirm'       => $this->confirm,
             'isAdmin'       => $this->role === 'admin',
             'isClient'      => $this->role === 'client',
-            'countProjects' => $this->projects_count,
-            'countTasks'    => 0,
+            'countProjects' => $this->projects_count ?? 0,
+            'countTasks'    => 0, // todo count task
+            'lastLogin'     => $this->when(isAdmin(), $this->lastLogin($this->journalsLastLogin)),
+            'balance'       => 0, // todo user balance
         ];
+    }
+
+
+    /**
+     * @param $data
+     * @return string
+     */
+    private function lastLogin($data): string
+    {
+        $lastLogin = '';
+
+        if ($data && count($data) > 0) {
+            $lastLogin = parseDateToTz($data->first()->created_at);
+        }
+
+        return $lastLogin;
     }
 }

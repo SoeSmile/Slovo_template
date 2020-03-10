@@ -25,8 +25,7 @@
 
         <ui-select :items="showList"
                    v-model="count"
-                   @onSelect="changePage"
-                   class="sm-mt-1"/>
+                   @onSelect="changePage"/>
     </div>
 </template>
 
@@ -62,6 +61,11 @@
             store     : {
                 type   : String,
                 default: ''
+            },
+            event     : {
+                type   : Function,
+                default: () => {
+                }
             },
             countShow : {
                 type   : Number,
@@ -103,6 +107,8 @@
             changePage(page) {
                 if (this.store) {
                     this.$store.dispatch(this.store, {count: this.count, page: page});
+                }else {
+                    this.event({count: this.count, page: page})
                 }
             }
         }

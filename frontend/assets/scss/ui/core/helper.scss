@@ -14,6 +14,14 @@
   }
 }
 
+// Width in px
+@for $i from 1 through 20 {
+  $value: $i * 50;
+  .#{$prefix}wpx-i-#{$value} {
+    width: $value*1px !important;
+  }
+}
+
 // Height
 @for $i from 1 through 20 {
   $value: $i * 5;

@@ -1,10 +1,10 @@
 <template>
     <div class="sm-notify animated fadeInDown"
-         :class="classes[storeData.view] ? classes[storeData.view] : classes.teal"
-         v-if="storeShow">
+         :class="classes[view] ? classes[view] : classes.teal"
+         v-if="show">
 
         <div class="content"
-             v-html="storeData.message">
+             v-html="message">
         </div>
 
         <div class="close" @click="close">
@@ -17,13 +17,36 @@
     export default {
         name: "uiNotify",
 
-        created() {
+        beforeMount() {
+            document.body.appendChild(this.$el);
         },
 
         mounted() {
+            let self = this;
+
+            setTimeout(function () {
+                self.close();
+            }, self.time);
         },
 
-        props: {},
+        props: {
+            view   : {
+                default: 'teal',
+                type   : String
+            },
+            message: {
+                default: '',
+                type   : String
+            },
+            time   : {
+                default: 3000,
+                type   : Number
+            },
+            show   : {
+                default: true,
+                type   : Boolean
+            }
+        },
 
         data() {
             return {
@@ -39,23 +62,16 @@
             }
         },
 
-        computed: {
-            storeShow() {
-                return this.$store.getters['notify/show'];
-            },
-            storeData() {
-                return this.$store.getters['notify/data'];
-            }
-        },
-
-        watch: {},
-
         methods: {
             /**
              * close
              */
             close() {
-                this.$store.dispatch('notify/closeNotify')
+                this.show = false;
+                setTimeout(() => {
+                    this.$destroy();
+                    this.$el.remove();
+                }, 300)
             }
         }
     }

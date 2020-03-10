@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Observers;
 
+use App\Repository\Dto\JournalDto;
 use App\Repository\JournalRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,15 +35,16 @@ abstract class AbstractObserver
      */
     public function storeJournal(Model $model, string $event = null): void
     {
-        $this->journal->store([
+        $this->journal->store(new JournalDto([
             'user_id' => auth()->id(),
             'event'   => $event,
             'data'    => [
                 'model' => [
                     'id'    => $model->id,
                     'class' => substr(strrchr(get_class($model), '\\'), 1),
+                    'name'  => $model->name ?? ''
                 ],
             ],
-        ]);
+        ]));
     }
 }

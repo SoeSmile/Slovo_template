@@ -32,7 +32,7 @@ export const actions = {
     async nuxtServerInit({commit}, {app, store, redirect}) {
 
         // translate
-        const response = await this.$axios.get('http://nginx/api/lang');
+        const response = await this.$axios.get('api/lang');
         commit('SET_LANG', response.data.data);
 
         // user && token
@@ -42,12 +42,12 @@ export const actions = {
             commit('auth/SET_TOKEN', {token: token});
 
             try {
-                const user = await this.$axios.post('http://nginx/api/me');
+                const user = await this.$axios.post('api/me');
                 commit('auth/SET_USER', {user: user.data.data});
             }
             catch (e) {
                 commit('auth/SET_TOKEN');
-                redirect('/login')
+                redirect('/')
             }
         }
     },

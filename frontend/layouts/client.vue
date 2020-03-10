@@ -1,6 +1,5 @@
 <template>
     <div class="sm-flex col sm-vh-100">
-        <ui-notify/>
         <client-head/>
 
         <div class="cs-container center sm-flex wide sm-vh-100">
@@ -29,23 +28,5 @@
             clientMainMenu,
             clientHead,
         },
-
-        created() {
-        },
-
-        mounted() {
-        },
-
-        props: {},
-
-        data() {
-            return {}
-        },
-
-        computed: {},
-
-        watch: {},
-
-        methods: {}
     }
 </script>

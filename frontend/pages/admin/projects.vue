@@ -58,8 +58,8 @@
                 </table>
 
                 <ui-pagination :pagination="paginate"
-                               :count-show="10"
-                               store="project/getProjects"/>
+                               :count-show="query.count"
+                               :event="getProjects"/>
             </div>
         </div>
 
@@ -78,32 +78,21 @@
             }
         },
 
-        created() {
-            this.getProjects('reset');
+        async asyncData({app}) {
+            const response = await app.$requestRun('get', 'api/projects', {count: 20});
+
+            return {
+                projects: response.data,
+                paginate: response.meta
+            }
         },
 
         data() {
             return {
+                projects: {},
+                paginate: {},
+                query   : {count: 20},
                 selected: [],
-            }
-        },
-
-        computed: {
-            /**
-             * projects
-             *
-             * @return {*}
-             */
-            projects() {
-                return this.$store.getters['project/projects'];
-            },
-            /**
-             * paginate
-             *
-             * @return {*}
-             */
-            paginate() {
-                return this.$store.getters['project/paginate'];
             }
         },
 
@@ -113,8 +102,12 @@
              *
              * @param request
              */
-            getProjects(request = null) {
-                this.$store.dispatch('project/getProjects', request);
+            async getProjects(request = null) {
+                this.selected = [];
+
+                const response = await this.$requestRun('get', 'api/projects', this.$requestMake(this.query, request));
+                this.projects  = response.data;
+                this.paginate  = response.meta;
             },
 
             /**

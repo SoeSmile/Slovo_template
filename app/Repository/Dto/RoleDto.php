@@ -3,6 +3,6 @@ declare(strict_types=1);
 
 namespace App\Repository\Dto;
 
-class RoleDto extends AbstractDto
+final class RoleDto extends AbstractDto
 {
 }

@@ -3,22 +3,18 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Eloquent;
+use App\Models\Traits\DataTimeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Journal
- *
  * @package App\Models
- * @property-read User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Journal newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Journal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Journal query()
- * @mixin Eloquent
  */
 class Journal extends Model
 {
+    use DataTimeTrait;
+
     /**
      * @var array
      */

@@ -4,30 +4,19 @@
         <div class="sm-bg-white sm-p-4 sm-mb-4">
             <div class="sm-nav sm-bg-teal-l sm-color-teal">
                 <div class="start">
-                    <div class="item link"
+                    <div class="item link sm-p-2"
                          @click="getUsers('reset')">
                         <i class="mdi mdi-sync sm-mr-1"></i>
                     </div>
-                    <n-link class="item link"
+                    <n-link class="item link sm-p-2"
                             to="users/new">
                         <i class="mdi mdi-plus-circle sm-mr-1"></i>
                         {{ trans.all.add }}
                     </n-link>
-                    <div class="item link"
-                         @click="edit">
-                        <i class="mdi mdi-pencil sm-mr-1"></i>
-                        {{ trans.all.edit }}
-                    </div>
-                    <div class="item link"
+                    <div class="item link sm-p-2"
                          @click="approve">
                         <i class="mdi mdi-check-decagram sm-mr-1"></i>
                         {{ trans.all.confirm }}
-                    </div>
-                </div>
-                <div class="end">
-                    <div class="item">
-                        <i class="mdi mdi-folder-search-outline fnt-size-3 sm-mr-2"></i>
-                        <ui-input view="teal"/>
                     </div>
                 </div>
             </div>
@@ -44,7 +33,7 @@
                     <th class="sm-w-20">
                         {{ this.trans.user.email }}
                     </th>
-                    <th class="sm-w-20">
+                    <th class="sm-w-10">
                         {{ this.trans.user.confirm }}
                     </th>
                     <th class="sm-w-20">
@@ -55,6 +44,9 @@
                     </th>
                     <th class="sm-w-10">
                         {{ this.trans.user.count_tasks }}
+                    </th>
+                    <th class="sm-w-10">
+                        {{ this.trans.user.last_login }}
                     </th>
                 </tr>
                 </thead>
@@ -81,14 +73,15 @@
                     <td>{{ val.role.name }}</td>
                     <td>{{ val.countProjects }}</td>
                     <td>{{ val.countTasks }}</td>
+                    <td>{{ val.lastLogin }}</td>
                 </tr>
                 </tbody>
                 <tfoot></tfoot>
             </table>
 
             <ui-pagination :pagination="paginate"
-                           :count-show="10"
-                           store="user/getUsers"/>
+                           :event="getUsers"
+                           :count-show="query.count"/>
         </div>
     </div>
 </template>
@@ -105,48 +98,40 @@
             }
         },
 
-        created() {
-            this.getUsers('reset');
+        async asyncData({app}) {
+            const response = await app.$requestRun('get', 'api/users', {count: 20});
+
+            return {
+                users   : response.data,
+                paginate: response.meta
+            }
         },
 
         data() {
             return {
+                users   : {},
+                paginate: {},
+                query   : {count: 20},
                 selected: [],
-            }
-        },
-
-        computed: {
-            /**
-             * projects
-             *
-             * @return {*}
-             */
-            users() {
-                return this.$store.getters['user/users'];
-            },
-            /**
-             * paginate
-             *
-             * @return {*}
-             */
-            paginate() {
-                return this.$store.getters['user/paginate'];
             }
         },
 
         methods: {
             /**
-             * get users
+             * получить список пользователей
              *
              * @param request
              */
-            getUsers(request = null) {
+            async getUsers(request = null) {
                 this.selected = [];
-                this.$store.dispatch('user/getUsers', request)
+
+                const response = await this.$requestRun('get', 'api/users', this.$requestMake(this.query, request));
+                this.users     = response.data;
+                this.paginate  = response.meta;
             },
 
             /**
-             * add/remove from select
+             * выбрать элемени и добавить/удалить в массив
              *
              * @param id
              */
@@ -159,21 +144,7 @@
             },
 
             /**
-             * edit item
-             */
-            edit() {
-                if (this.selected.length > 0) {
-
-                    const item = this.users.find((el) => {
-                        return el.id === this.selected[this.selected.length - 1];
-                    });
-
-                    this.$router.push('users/' + this.selected[this.selected.length - 1]);
-                }
-            },
-
-            /**
-             * approved/unapproved users
+             * подтвердить или снять отметку подтвержедения у пользователя
              */
             approve() {
                 if (this.selected.length > 0) {
@@ -186,18 +157,13 @@
                             no      : this.trans.all.no,
                             onSubmit: () => {
 
-                                this.$axios.post('../api/users/approve', {ids: this.selected})
+                                this.$axios.post('api/users/approve', {ids: this.selected})
                                     .then(response => {
-                                        this.$store.dispatch('notify/showNotify', {
-                                            message: this.trans.all.success
-                                        });
+                                        this.$notify.show({message: this.trans.all.success});
                                         this.getUsers();
                                     })
                                     .catch(e => {
-                                        this.$store.dispatch('notify/showNotify', {
-                                            view   : 'red',
-                                            message: e.response.data.errors
-                                        });
+                                        this.$notify.show({message: e.response.data.errors, view: 'red'});
                                     });
                             }
                         });

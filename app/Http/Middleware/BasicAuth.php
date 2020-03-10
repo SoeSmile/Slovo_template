@@ -23,7 +23,7 @@ class BasicAuth
     public function handle($request, Closure $next)
     {
         $user = User::where('email', $request->getUser())
-            ->where('role_type', 'admin')
+            ->where('role', 'admin')
             ->first();
 
         if ($user && \Hash::check($request->getPassword(), $user->password)) {

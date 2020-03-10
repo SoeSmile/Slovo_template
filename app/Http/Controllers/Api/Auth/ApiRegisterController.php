@@ -56,7 +56,7 @@ class ApiRegisterController
             $user->update([
                 'confirm_key' => null,
                 'confirm'     => true,
-                'role_type'   => 'client',
+                'role'        => 'client',
             ]);
 
             return view('auth.confirm');

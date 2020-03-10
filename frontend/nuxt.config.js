@@ -1,4 +1,7 @@
+const env = require('dotenv').config();
+
 export default {
+    env: env.parsed,
 
     head: {
         titleTemplate: 'SlovoTop - %s',
@@ -14,7 +17,7 @@ export default {
         height: '5px'
     },
 
-    cache: false,
+    cache: true,
 
     css: [
         {
@@ -25,10 +28,10 @@ export default {
 
     plugins: [
         '~/plugins/ui',
-        '~/plugins/trans',
         '~/plugins/mixin',
         '~/plugins/auth',
-        '~/plugins/axios'
+        '~/plugins/axios',
+        '~/plugins/builder'
     ],
 
     modules: [
@@ -37,9 +40,9 @@ export default {
     ],
 
     axios: {
-        baseURL: "/",
+        baseURL: process.env.APP_URL,
         headers: {
-            'Accept'  : 'application/json'
+            'Accept': 'application/json'
         }
     },
 

@@ -62,46 +62,40 @@
             }
         },
 
-        created() {
-            this.getRoles('reset');
+        async asyncData({app}) {
+            const response = await app.$requestRun('get', 'api/roles', {count: 20});
+
+            return {
+                roles   : response.data,
+                paginate: response.meta
+            }
         },
 
         data() {
             return {
-                role    : {},
+                roles   : {},
+                paginate: {},
+                query   : {count: 20},
                 selected: [],
-            }
-        },
-
-        computed: {
-            /**
-             * projects
-             *
-             * @return {*}
-             */
-            roles() {
-                return this.$store.getters['role/roles'];
-            },
-            /**
-             * paginate
-             *
-             * @return {*}
-             */
-            paginate() {
-                return this.$store.getters['role/paginate'];
             }
         },
 
         methods: {
             /**
-             * get roles
+             * получить список ролей
+             *
+             * @param request
              */
-            getRoles(reset = null) {
-                this.$store.dispatch('role/getRoles', reset);
+            async getRoles(request = null) {
+                this.selected = [];
+
+                const response = await this.$requestRun('get', 'api/roles', this.$requestMake(this.query, request));
+                this.roles     = response.data;
+                this.paginate  = response.meta;
             },
 
             /**
-             * add/remove from select
+             * выбрать элемени и добавить/удалить в массив
              *
              * @param id
              */

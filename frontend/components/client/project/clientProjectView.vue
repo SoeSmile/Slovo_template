@@ -5,7 +5,6 @@
                 {{ project.data.name ? trans.all.edit : trans.all.add }}
             </template>
             <template v-slot:content>
-
                 <ui-input class="sm-mb-2"
                           :label="trans.project.name"
                           :placeholder="trans.project.name"
@@ -19,7 +18,6 @@
                           :placeholder="trans.project.url"
                           :on-submit="store"
                           v-model="project.data.url"/>
-
             </template>
             <template v-slot:foot>
                 <div class="sm-button sm-bg-blue-l sm-color-blue"
@@ -35,12 +33,6 @@
     export default {
         name: "clientProjectView",
 
-        created() {
-        },
-
-        mounted() {
-        },
-
         props: {
             project: {
                 type   : Object,
@@ -50,19 +42,12 @@
         },
 
         data() {
-            return {}
-        },
-
-        computed: {
-            /**
-             * errors
-             */
-            errors() {
-                return this.$store.getters['project/errors'];
+            return {
+                errors: {
+                    name: null
+                }
             }
         },
-
-        watch: {},
 
         methods: {
             /**
@@ -71,7 +56,8 @@
             showHide() {
                 this.project.data = {};
                 this.project.show = !this.project.show;
-                this.$store.dispatch('project/setErrors');
+                this.errors       = {name: null};
+                this.$emit('close', 'reset');
             },
 
             /**
@@ -80,7 +66,7 @@
             validate() {
                 if (!this.project.data.name) {
 
-                    this.$store.dispatch('project/setErrors', {name: this.trans.warning.required_field});
+                    this.errors.name = this.trans.warning.required_field;
                     return false;
                 }
 
@@ -91,15 +77,22 @@
              * store project
              */
             store() {
-                if (!this.validate()) return;
+                let method = 'post',
+                    link   = 'api/projects';
 
                 if (this.project.data.id) {
-                    this.$store.dispatch('project/updateProject', this.serializeData(this.project.data));
-                } else {
-                    this.$store.dispatch('project/storeProject', this.serializeData(this.project.data));
+                    method = 'put';
+                    link   = 'api/projects/' + this.project.data.id;
                 }
 
-                this.showHide();
+                this.$axios[method](link, this.serializeData(this.project.data))
+                    .then(response => {
+                        this.showHide();
+                        this.$notify.show({message: this.trans.all.success});
+                    })
+                    .catch(e => {
+                        this.errors = e.response.data.errors;
+                    });
             },
 
             /**

@@ -38,7 +38,7 @@
 
         </div>
 
-        <ui-alert v-if="ieRegister"
+        <ui-alert v-if="isRegister"
                   class="sm-mt-5"
                   :time="10"
                   :on-hide="close"
@@ -66,78 +66,65 @@
             this.close();
         },
 
-        mounted() {
-        },
-
         props: {},
 
         data() {
             return {
-                user: {
+                user      : {
                     name    : null,
                     email   : null,
                     password: null,
-                }
+                },
+                errors    : {},
+                isRegister: false
             }
         },
-
-        computed: {
-            /**
-             * login errors
-             */
-            errors() {
-                return this.$store.getters['register/errors'];
-            },
-            /**
-             * if user is register
-             */
-            ieRegister() {
-                return this.$store.getters['register/isRegister'];
-            }
-        },
-
-        watch: {},
 
         methods: {
             /**
-             * clear data
+             * clear and init data
              */
             close() {
-                this.user = {
+                this.user       = {
                     name    : null,
                     email   : null,
                     password: null
                 };
-                this.$store.commit('register/SET_ERRORS');
-                this.$store.commit('register/SET_IS_REGISTER');
+                this.isRegister = false;
+                this.errors     = {...this.user};
             },
 
             /**
              * validate data
              */
             validation() {
-                let result = true,
-                    errors = {};
+                let result = true;
 
                 for (let i in this.user) {
 
                     if (!this.user[i]) {
-                        result    = false;
-                        errors[i] = this.trans.warning.required_field;
+                        result         = false;
+                        this.errors[i] = this.trans.warning.required_field;
                     }
                 }
-
-                this.$store.commit('register/SET_ERRORS', errors);
 
                 return result;
             },
 
             /**
-             * register
+             * register user
              */
             register() {
                 if (this.validation()) {
-                    this.$store.dispatch('register/register', this.serializeData(this.user));
+                    this.errors = {};
+
+                    this.$axios.post('api/register', this.serializeData(this.user))
+                        .then(response => {
+                            this.isRegister = !!response;
+                        })
+                        .catch(e => {
+                            this.errors = e.response.data.errors;
+                        });
                 }
             },
 
